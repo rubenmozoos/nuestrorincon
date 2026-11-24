@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Nuestro Rincón — Rubén & Mar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: {
+                            50: '#FAF7F2',
+                            100: '#F3EDE2',
+                            200: '#E7DEC8',
+                            300: '#D6C9AD',
+                        },
+                        terracotta: {
+                            50: '#FCF5F2',
+                            100: '#F7E5DE',
+                            200: '#EEC7B9',
+                            400: '#D8886E',
+                            500: '#C97B63',
+                            600: '#B0634B',
+                            700: '#8E4B37',
+                        },
+                        rose: {
+                            50: '#FDF6F6',
+                            100: '#F9E8E8',
+                            300: '#E8BDBD',
+                        },
+                        sage: {
+                            50: '#F3F7F4',
+                            100: '#E2ECE5',
+                            500: '#6B8E78',
+                            600: '#557360',
+                            700: '#425A4B',
+                        },
+                        gold: {
+                            50: '#FBF7EE',
+                            100: '#F5EBD4',
+                            400: '#D4A359',
+                            500: '#B8873D',
+                        },
+                        ink: {
+                            800: '#3B2F2B',
+                            900: '#261D1A',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 14px 34px -8px rgba(38, 29, 26, 0.09)',
+                        'card': '0 4px 20px -2px rgba(201, 123, 99, 0.08)',
+                        'polaroid': '0 8px 24px -4px rgba(38, 29, 26, 0.12)',
+                        'nav': '0 -6px 24px rgba(38, 29, 26, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #EFE9DE;
+            color: #261D1A;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .view-section {
+            animation: fadeSlideUp 0.28s ease-out forwards;
+        }
+        @keyframes shakeError {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-7px); }
+            40%, 80% { transform: translateX(7px); }
+        }
+        .shake-anim {
+            animation: shakeError 0.38s ease-in-out;
+        }
+        @keyframes pulseGold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 163, 89, 0.35); }
+            50% { box-shadow: 0 0 0 9px rgba(212, 163, 89, 0); }
+        }
+        .celebration-glow {
+            animation: pulseGold 2.6s infinite;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex justify-center">
+
+    <!-- ========================================================= -->
+    <!-- PANTALLA DE LOGIN PRIVADO                                 -->
+    <!-- ========================================================= -->
+    <div id="login-screen" class="w-full max-w-md sm:max-w-lg min-h-screen bg-cream-50 shadow-2xl flex flex-col justify-center px-5 py-10 relative overflow-hidden">
+        <div class="absolute -right-14 -top-14 w-52 h-52 rounded-full bg-terracotta-200/40 blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-14 -bottom-14 w-56 h-56 rounded-full bg-gold-400/20 blur-3xl pointer-events-none"></div>
+
+        <div id="login-card" class="relative z-10 w-full bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-soft border border-cream-200 space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-terracotta-500 to-ink-900 text-cream-50 flex items-center justify-center shadow-md mb-3">
+                    <i data-lucide="lock" class="w-6 h-6"></i>
+                </div>
+                <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-terracotta-600 bg-terracotta-50 px-3 py-1 rounded-full">
+                    <i data-lucide="heart" class="w-3 h-3 fill-current"></i>
+                    Acceso privado · Solo Rubén & Mar
+                </span>
+                <h1 class="font-serif text-3xl font-bold text-ink-900 pt-1">Nuestro Rincón</h1>
+                <p class="text-xs text-ink-800/70">Introduce tu usuario y contraseña para entrar</p>
+            </div>
+
+            <form id="form-login" novalidate class="space-y-4">
+                <div>
+                    <label for="login-username" class="block text-xs font-semibold text-ink-800 mb-1.5">Usuario</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-3.5 flex items-center text-ink-800/45 pointer-events-none">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                        </span>
+                        <input type="text" id="login-username" autocomplete="username" placeholder="Tu usuario"
+                            class="w-full pl-10 pr-4 py-3 rounded-2xl bg-cream-50/70 border border-cream-300 text-sm text-ink-900 focus:bg-white focus:outline-none focus:border-terracotta-500 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="login-password" class="block text-xs font-semibold text-ink-800 mb-1.5">Contraseña</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-3.5 flex items-center text-ink-800/45 pointer-events-none">
+                            <i data-lucide="key-round" class="w-4 h-4"></i>
+                        </span>
+                        <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••"
+                            class="w-full pl-10 pr-11 py-3 rounded-2xl bg-cream-50/70 border border-cream-300 text-sm text-ink-900 focus:bg-white focus:outline-none focus:border-terracotta-500 transition">
+                        <button type="button" id="btn-toggle-password" title="Mostrar u ocultar contraseña"
+                            class="absolute inset-y-0 right-3 flex items-center text-ink-800/50 hover:text-ink-900 transition">
+                            <i id="icon-eye-pass" data-lucide="eye" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <label class="flex items-center gap-2.5 cursor-pointer select-none pt-0.5">
+                    <input type="checkbox" id="login-remember" checked class="w-4 h-4 rounded-md accent-terracotta-500 border-cream-300">
+                    <span class="text-xs text-ink-800/80 font-medium">Mantener sesión iniciada en este dispositivo</span>
+                </label>
+
+                <div id="login-error-box" class="hidden rounded-2xl bg-terracotta-50 border border-terracotta-400/60 px-3.5 py-2.5 text-xs font-medium text-terracotta-700 flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="w-4 h-4 shrink-0"></i>
+                    <span id="login-error-text" class="min-w-0 break-words">Usuario o contraseña incorrectos. Este espacio es privado.</span>
+                </div>
+
+                <button type="button" id="btn-login-submit" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 text-white font-semibold text-sm shadow-md transition active:scale-98 flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                    Entrar a nuestro rincón
+                </button>
+            </form>
+
+            <p class="text-center text-[11px] text-ink-800/55 pt-1">
+                28 de febrero de 2025 · 12:00h
+            </p>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- APLICACIÓN PRINCIPAL                                      -->
+    <!-- ========================================================= -->
+    <div id="app-shell" class="hidden w-full max-w-md sm:max-w-lg bg-cream-50 min-h-screen shadow-2xl relative flex flex-col overflow-x-hidden">
+
+        <!-- Cabecera Superior -->
+        <header class="sticky top-0 z-30 bg-cream-50/90 backdrop-blur-md border-b border-cream-200 px-4 py-3 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-terracotta-500 to-ink-900 flex items-center justify-center text-cream-50 shadow-sm shrink-0">
+                    <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h1 id="header-names" class="font-serif text-lg sm:text-xl font-bold leading-none text-ink-900 truncate">Rubén & Mar</h1>
+                    <p id="header-user-greeting" class="text-[11px] text-terracotta-600 font-semibold mt-0.5 truncate">Hola, Mar</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1.5 shrink-0">
+                <button type="button" id="btn-open-sync" title="Respaldo y sincronización JSON" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-cream-100 hover:bg-terracotta-100 border border-cream-300 text-[11px] font-semibold text-ink-800 transition active:scale-95">
+                    <span class="w-2 h-2 rounded-full bg-sage-500"></span>
+                    <span>Respaldo</span>
+                </button>
+                <button type="button" id="btn-open-profile" title="Editar nombres visibles" class="p-2 rounded-full bg-cream-100 hover:bg-terracotta-100 border border-cream-300 text-ink-800 transition active:scale-95">
+                    <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" id="btn-logout" title="Cerrar sesión y bloquear" class="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-ink-900 hover:bg-ink-800 text-cream-50 text-[11px] font-semibold transition active:scale-95">
+                    <i data-lucide="log-out" class="w-3 h-3"></i>
+                    <span>Salir</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenido Principal -->
+        <main class="flex-1 px-4 sm:px-5 pt-5 pb-28 overflow-y-auto">
+
+            <!-- ========================================================= -->
+            <!-- 1. PÁGINA PRINCIPAL (INICIO)                              -->
+            <!-- ========================================================= -->
+            <section id="sec-inicio" class="view-section space-y-4">
+                <!-- Banner de Celebración Automática (Día 28 / 28 Febrero) -->
+                <div id="anniversary-banner" class="hidden rounded-3xl p-4 bg-gradient-to-r from-gold-100 via-rose-50 to-gold-100 border border-gold-400/70 celebration-glow">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-gold-400/25 text-gold-500 flex items-center justify-center shrink-0">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span id="anniversary-badge" class="text-[10px] font-bold uppercase tracking-widest text-gold-500">¡Hoy toca celebrar!</span>
+                            <h2 id="anniversary-title" class="font-serif text-lg font-bold text-ink-900 leading-snug mt-0.5 break-words"></h2>
+                            <p id="anniversary-desc" class="text-xs text-ink-800/80 mt-1 break-words"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Principal del Contador -->
+                <div class="rounded-3xl bg-gradient-to-br from-white via-rose-50/40 to-terracotta-50/75 p-5 sm:p-6 shadow-soft border border-cream-200 relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-terracotta-200/35 blur-2xl pointer-events-none"></div>
+                    <div class="relative z-10 text-center space-y-3">
+                        <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-terracotta-600 bg-terracotta-100/80 px-3 py-1 rounded-full">
+                            <i data-lucide="calendar-heart" class="w-3.5 h-3.5 shrink-0"></i>
+                            Desde el 28 feb 2025 · 12:00h
+                        </span>
+
+                        <div>
+                            <div id="counter-total-days" class="font-serif text-6xl sm:text-7xl font-bold text-ink-900 tracking-tight leading-none">0</div>
+                            <div class="text-sm font-semibold uppercase tracking-widest text-terracotta-600 mt-1.5">días juntos</div>
+                        </div>
+
+                        <p id="counter-ym-summary" class="font-serif italic text-base text-ink-800/85 break-words">
+                            0 meses y 0 días de historia
+                        </p>
+
+                        <!-- Reloj en tiempo real: Horas : Minutos : Segundos -->
+                        <div class="grid grid-cols-3 gap-2.5 pt-2 max-w-xs mx-auto items-stretch">
+                            <div class="h-full bg-white/95 rounded-2xl py-2.5 px-2 border border-cream-200 shadow-xs flex flex-col items-center justify-center">
+                                <div id="counter-hours" class="font-serif text-2xl font-bold text-ink-900 leading-none">00</div>
+                                <div class="text-[10px] uppercase tracking-wider text-ink-800/60 mt-1">Horas</div>
+                            </div>
+                            <div class="h-full bg-white/95 rounded-2xl py-2.5 px-2 border border-cream-200 shadow-xs flex flex-col items-center justify-center">
+                                <div id="counter-minutes" class="font-serif text-2xl font-bold text-ink-900 leading-none">00</div>
+                                <div class="text-[10px] uppercase tracking-wider text-ink-800/60 mt-1">Minutos</div>
+                            </div>
+                            <div class="h-full bg-white/95 rounded-2xl py-2.5 px-2 border border-cream-200 shadow-xs flex flex-col items-center justify-center">
+                                <div id="counter-seconds" class="font-serif text-2xl font-bold text-terracotta-600 leading-none">00</div>
+                                <div class="text-[10px] uppercase tracking-wider text-ink-800/60 mt-1">Segundos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cuentas atrás simétricas: Siguiente Mesversario y Siguiente Aniversario -->
+                <div class="grid grid-cols-2 gap-3 items-stretch">
+                    <div class="h-full bg-white rounded-3xl p-4 shadow-card border border-cream-200 flex flex-col justify-between space-y-2 min-w-0">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600 truncate">Próx. Mes</span>
+                            <i data-lucide="moon-star" class="w-4 h-4 text-terracotta-400 shrink-0"></i>
+                        </div>
+                        <div id="next-month-countdown" class="font-serif text-lg font-bold text-ink-900 leading-tight break-words">—</div>
+                        <p id="next-month-label" class="text-[11px] text-ink-800/70 break-words">Cada día 28 a las 12:00</p>
+                    </div>
+
+                    <div class="h-full bg-white rounded-3xl p-4 shadow-card border border-cream-200 flex flex-col justify-between space-y-2 min-w-0">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gold-500 truncate">Próx. Año</span>
+                            <i data-lucide="award" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                        </div>
+                        <div id="next-year-countdown" class="font-serif text-lg font-bold text-ink-900 leading-tight break-words">—</div>
+                        <p id="next-year-label" class="text-[11px] text-ink-800/70 break-words">Cada 28 de febrero a las 12:00</p>
+                    </div>
+                </div>
+
+                <!-- Accesos rápidos en cuadrícula simétrica -->
+                <div class="grid grid-cols-2 gap-3 items-stretch">
+                    <button type="button" onclick="navigateTo('buzon'); openComposeNoteModal();" class="h-full text-left bg-white hover:bg-rose-50/50 rounded-3xl p-4 shadow-card border border-cream-200 transition flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-2xl bg-terracotta-50 text-terracotta-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="pen-square" class="w-4 h-4"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600 block">Buzón</span>
+                            <span class="text-xs font-bold text-ink-900 truncate block mt-0.5">Escribir nota</span>
+                        </div>
+                    </button>
+
+                    <button type="button" onclick="navigateTo('gustos')" class="h-full text-left bg-white hover:bg-rose-50/50 rounded-3xl p-4 shadow-card border border-cream-200 transition flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-2xl bg-gold-50 text-gold-500 flex items-center justify-center shrink-0">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gold-500 block">Chuleta</span>
+                            <span class="text-xs font-bold text-ink-900 truncate block mt-0.5">Nuestros gustos</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Acceso directo al próximo plan agendado -->
+                <div onclick="navigateTo('calendario')" class="cursor-pointer bg-white rounded-3xl p-4 shadow-card border border-cream-200 hover:border-terracotta-300 transition flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                        <div class="w-11 h-11 rounded-2xl bg-sage-50 text-sage-700 flex items-center justify-center shrink-0">
+                            <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-sage-700 block">Próximo plan en agenda</span>
+                            <p id="home-next-plan-title" class="text-sm font-bold text-ink-900 truncate mt-0.5">Sin planes próximos</p>
+                            <p id="home-next-plan-meta" class="text-[11px] text-ink-800/65 truncate">Toca para abrir el calendario</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-ink-800/40 shrink-0"></i>
+                </div>
+
+                <!-- Vista previa de últimos recuerdos de la galería -->
+                <div class="bg-white rounded-3xl p-4 shadow-card border border-cream-200 space-y-3">
+                    <div class="flex items-center justify-between gap-2">
+                        <h3 class="font-serif text-lg font-bold text-ink-900 truncate">Últimos recuerdos</h3>
+                        <button type="button" onclick="navigateTo('galeria')" class="text-xs font-semibold text-terracotta-600 hover:underline flex items-center gap-1 shrink-0">
+                            Ver galería <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                    <div id="home-recent-photos" class="grid grid-cols-3 gap-2.5"></div>
+                </div>
+
+                <!-- Historial Desplegable de Meses y Años Cumplidos -->
+                <div class="bg-white rounded-3xl shadow-card border border-cream-200 overflow-hidden">
+                    <button type="button" onclick="toggleMilestonesHistory()" class="w-full px-5 py-4 flex items-center justify-between gap-3 text-left">
+                        <div class="min-w-0 flex-1">
+                            <h3 class="font-serif text-base font-bold text-ink-900 truncate">Historial de meses y años cumplidos</h3>
+                            <p id="milestones-count-subtitle" class="text-xs text-ink-800/70 truncate">Ver todos los hitos desde feb 2025</p>
+                        </div>
+                        <i id="milestones-chevron" data-lucide="chevron-down" class="w-5 h-5 text-ink-800/60 transition-transform duration-200 shrink-0"></i>
+                    </button>
+                    <div id="milestones-list" class="hidden px-5 pb-4 pt-1 border-t border-cream-100 max-h-60 overflow-y-auto space-y-2"></div>
+                </div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 2. PESTAÑA CALENDARIO DE PLANES                           -->
+            <!-- ========================================================= -->
+            <section id="sec-calendario" class="view-section hidden space-y-4">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <h2 class="font-serif text-2xl font-bold text-ink-900 truncate">Calendario</h2>
+                        <p class="text-xs text-ink-800/75 truncate">Toca cualquier día para ver o añadir planes</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button type="button" onclick="changeCalendarMonth(-1)" class="p-2.5 rounded-full bg-white border border-cream-200 shadow-xs hover:bg-cream-100 transition active:scale-95">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                        </button>
+                        <button type="button" onclick="goToCurrentMonth()" class="px-3 py-2 rounded-full bg-white border border-cream-200 shadow-xs text-xs font-semibold hover:bg-cream-100 transition">
+                            Hoy
+                        </button>
+                        <button type="button" onclick="changeCalendarMonth(1)" class="p-2.5 rounded-full bg-white border border-cream-200 shadow-xs hover:bg-cream-100 transition active:scale-95">
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-4 shadow-soft border border-cream-200">
+                    <div id="calendar-month-title" class="font-serif text-xl font-bold text-center text-ink-900 mb-3 capitalize">
+                        Mes Año
+                    </div>
+
+                    <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">L</div>
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">M</div>
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">X</div>
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">J</div>
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">V</div>
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">S</div>
+                        <div class="text-[11px] font-bold text-ink-800/55 py-1">D</div>
+                    </div>
+
+                    <div id="calendar-grid" class="grid grid-cols-7 gap-1.5"></div>
+
+                    <div class="flex items-center justify-center gap-4 mt-4 pt-3 border-t border-cream-100 text-[11px] text-ink-800/70">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-terracotta-500"></span> Plan agendado</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gold-400"></span> Día 28 (Mes)</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h3 class="font-serif text-lg font-bold text-ink-900">Planes de este mes</h3>
+                    <div id="calendar-month-events-list" class="space-y-2.5"></div>
+                </div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 3. PESTAÑA GALERÍA DE FOTOS                               -->
+            <!-- ========================================================= -->
+            <section id="sec-galeria" class="view-section hidden space-y-4">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <h2 class="font-serif text-2xl font-bold text-ink-900 truncate">Galería de Fotos</h2>
+                        <p class="text-xs text-ink-800/75 truncate">Nuestros mejores momentos guardados</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button type="button" onclick="openAddPhotoUrlModal()" title="Añadir foto desde enlace URL" class="p-2.5 rounded-full bg-white hover:bg-cream-100 border border-cream-300 text-ink-800 shadow-xs transition active:scale-95">
+                            <i data-lucide="link" class="w-4 h-4"></i>
+                        </button>
+                        <label for="photo-file-input" class="cursor-pointer flex items-center gap-1.5 bg-terracotta-500 hover:bg-terracotta-600 text-white text-xs font-semibold px-3.5 py-2.5 rounded-full shadow-md transition active:scale-95">
+                            <i data-lucide="camera" class="w-4 h-4"></i>
+                            Subir foto
+                        </label>
+                    </div>
+                    <input type="file" id="photo-file-input" accept="image/*" multiple class="hidden">
+                </div>
+
+                <!-- Filtros de categoría y favoritas -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                    <button type="button" onclick="setGalleryFilter('todas', this)" class="gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-ink-900 text-white transition shrink-0">
+                        Todas
+                    </button>
+                    <button type="button" onclick="setGalleryFilter('favoritas', this)" class="gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        ❤️ Favoritas
+                    </button>
+                    <button type="button" onclick="setGalleryFilter('Cita', this)" class="gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        🍷 Cita
+                    </button>
+                    <button type="button" onclick="setGalleryFilter('Viaje', this)" class="gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        ✈️ Viaje
+                    </button>
+                    <button type="button" onclick="setGalleryFilter('Día especial', this)" class="gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        ✨ Día especial
+                    </button>
+                    <button type="button" onclick="setGalleryFilter('Cotidiano', this)" class="gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        ☕ Cotidiano
+                    </button>
+                </div>
+
+                <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch"></div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 4. PESTAÑA BUZÓN DE NOTAS (ESTILO CORREO / GMAIL)          -->
+            <!-- ========================================================= -->
+            <section id="sec-buzon" class="view-section hidden space-y-4">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <h2 class="font-serif text-2xl font-bold text-ink-900 truncate">Buzón de Notas</h2>
+                        <p class="text-xs text-ink-800/75 truncate">Correo privado entre Rubén y Mar</p>
+                    </div>
+                    <button type="button" onclick="openComposeNoteModal()" class="flex items-center gap-1.5 bg-gradient-to-r from-terracotta-500 to-terracotta-600 hover:from-terracotta-600 hover:to-terracotta-700 text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-md transition active:scale-95 shrink-0">
+                        <i data-lucide="pen-square" class="w-4 h-4"></i>
+                        + Redactar
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 bg-cream-200/75 p-1.5 rounded-2xl">
+                    <button type="button" id="tab-mail-inbox" onclick="setMailboxFolder('inbox')" class="py-2.5 px-2 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition flex items-center justify-center gap-1 min-w-0">
+                        <i data-lucide="inbox" class="w-3.5 h-3.5 text-terracotta-500 shrink-0"></i>
+                        <span class="truncate">Recibidos</span>
+                        <span id="badge-inbox-unread" class="hidden text-[10px] font-bold bg-terracotta-500 text-white px-1.5 py-0.2 rounded-full shrink-0">0</span>
+                    </button>
+                    <button type="button" id="tab-mail-sent" onclick="setMailboxFolder('sent')" class="py-2.5 px-2 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition flex items-center justify-center gap-1 min-w-0">
+                        <i data-lucide="send" class="w-3.5 h-3.5 text-sage-600 shrink-0"></i>
+                        <span class="truncate">Enviados</span>
+                        <span id="badge-sent-count" class="text-[10px] font-semibold text-ink-800/60 shrink-0">0</span>
+                    </button>
+                    <button type="button" id="tab-mail-starred" onclick="setMailboxFolder('starred')" class="py-2.5 px-2 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition flex items-center justify-center gap-1 min-w-0">
+                        <i data-lucide="star" class="w-3.5 h-3.5 text-gold-500 shrink-0"></i>
+                        <span class="truncate">Favoritos</span>
+                    </button>
+                </div>
+
+                <div id="mailbox-list" class="space-y-2.5"></div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 5. PESTAÑA PLANES (NUEVOS Y REGISTRO DE HECHOS)           -->
+            <!-- ========================================================= -->
+            <section id="sec-planes" class="view-section hidden space-y-4">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <h2 class="font-serif text-2xl font-bold text-ink-900 truncate">Nuestros Planes</h2>
+                        <p class="text-xs text-ink-800/75 truncate">Ideas por cumplir e historial vivido</p>
+                    </div>
+                    <button type="button" onclick="openNewPlanModal()" class="flex items-center gap-1.5 bg-terracotta-500 hover:bg-terracotta-600 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-md transition active:scale-95 shrink-0">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        Añadir plan
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-1.5 bg-cream-200/75 p-1.5 rounded-2xl">
+                    <button type="button" id="tab-plans-pending" onclick="switchPlansSubtab('pending')" class="py-2.5 px-3 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition flex items-center justify-center gap-1.5 min-w-0">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-terracotta-500 shrink-0"></i>
+                        <span class="truncate">Nuevos (<span id="count-pending-plans">0</span>)</span>
+                    </button>
+                    <button type="button" id="tab-plans-done" onclick="switchPlansSubtab('done')" class="py-2.5 px-3 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition flex items-center justify-center gap-1.5 min-w-0">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-sage-600 shrink-0"></i>
+                        <span class="truncate">Hechos (<span id="count-done-plans">0</span>)</span>
+                    </button>
+                </div>
+
+                <div id="plans-container" class="space-y-3"></div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 6. PESTAÑA GUSTOS Y DETALLES                              -->
+            <!-- ========================================================= -->
+            <section id="sec-gustos" class="view-section hidden space-y-4">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <h2 class="font-serif text-2xl font-bold text-ink-900 truncate">Gustos y Detalles</h2>
+                        <p class="text-xs text-ink-800/75 truncate">Cosas que nos encantan · Toca para editar</p>
+                    </div>
+                    <button type="button" onclick="openNewLikeModal()" class="flex items-center gap-1.5 bg-terracotta-500 hover:bg-terracotta-600 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-md transition active:scale-95 shrink-0">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        Añadir
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 bg-cream-200/75 p-1.5 rounded-2xl">
+                    <button type="button" onclick="setLikesPersonFilter('todos', this)" class="like-person-tab py-2 px-2.5 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition truncate">
+                        Todos
+                    </button>
+                    <button type="button" id="tab-likes-p2" onclick="setLikesPersonFilter('p2', this)" class="like-person-tab py-2 px-2.5 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition truncate">
+                        Mar
+                    </button>
+                    <button type="button" id="tab-likes-p1" onclick="setLikesPersonFilter('p1', this)" class="like-person-tab py-2 px-2.5 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition truncate">
+                        Rubén
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                    <button type="button" onclick="setLikesCategoryFilter('todas', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-ink-900 text-white transition shrink-0">
+                        Todas
+                    </button>
+                    <button type="button" onclick="setLikesCategoryFilter('Comida y dulce', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        🍫 Comida y dulce
+                    </button>
+                    <button type="button" onclick="setLikesCategoryFilter('Regalos e ideas', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        🎁 Regalos e ideas
+                    </button>
+                    <button type="button" onclick="setLikesCategoryFilter('Canciones y pelis', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        🎵 Canciones y pelis
+                    </button>
+                    <button type="button" onclick="setLikesCategoryFilter('Tallas y medidas', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        👕 Tallas y medidas
+                    </button>
+                    <button type="button" onclick="setLikesCategoryFilter('Manías y curiosidades', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        ✨ Manías y curiosidades
+                    </button>
+                    <button type="button" onclick="setLikesCategoryFilter('Favoritos', this)" class="like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0">
+                        ❤️ Favoritos
+                    </button>
+                </div>
+
+                <div id="likes-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch"></div>
+            </section>
+
+        </main>
+
+        <!-- Barra de Navegación Inferior Fija -->
+        <nav class="fixed bottom-0 w-full max-w-md sm:max-w-lg bg-white/95 backdrop-blur-md border-t border-cream-200 px-1.5 py-2 shadow-nav z-30">
+            <div class="grid grid-cols-6 gap-1">
+                <button type="button" onclick="navigateTo('inicio')" data-nav="inicio" class="bottom-nav-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-terracotta-600 bg-terracotta-50 transition min-w-0">
+                    <i data-lucide="heart" class="w-4 h-4 mb-1 shrink-0"></i>
+                    <span class="text-[9.5px] font-bold truncate max-w-full">Inicio</span>
+                </button>
+                <button type="button" onclick="navigateTo('calendario')" data-nav="calendario" class="bottom-nav-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-ink-800/60 hover:text-ink-900 transition min-w-0">
+                    <i data-lucide="calendar-days" class="w-4 h-4 mb-1 shrink-0"></i>
+                    <span class="text-[9.5px] font-semibold truncate max-w-full">Calendario</span>
+                </button>
+                <button type="button" onclick="navigateTo('galeria')" data-nav="galeria" class="bottom-nav-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-ink-800/60 hover:text-ink-900 transition min-w-0">
+                    <i data-lucide="image" class="w-4 h-4 mb-1 shrink-0"></i>
+                    <span class="text-[9.5px] font-semibold truncate max-w-full">Galería</span>
+                </button>
+                <button type="button" onclick="navigateTo('buzon')" data-nav="buzon" class="bottom-nav-btn relative flex flex-col items-center justify-center py-1.5 rounded-2xl text-ink-800/60 hover:text-ink-900 transition min-w-0">
+                    <i data-lucide="mail" class="w-4 h-4 mb-1 shrink-0"></i>
+                    <span class="text-[9.5px] font-semibold truncate max-w-full">Notas</span>
+                    <span id="nav-unread-dot" class="hidden absolute top-1.5 right-3 w-2 h-2 rounded-full bg-terracotta-500"></span>
+                </button>
+                <button type="button" onclick="navigateTo('planes')" data-nav="planes" class="bottom-nav-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-ink-800/60 hover:text-ink-900 transition min-w-0">
+                    <i data-lucide="compass" class="w-4 h-4 mb-1 shrink-0"></i>
+                    <span class="text-[9.5px] font-semibold truncate max-w-full">Planes</span>
+                </button>
+                <button type="button" onclick="navigateTo('gustos')" data-nav="gustos" class="bottom-nav-btn flex flex-col items-center justify-center py-1.5 rounded-2xl text-ink-800/60 hover:text-ink-900 transition min-w-0">
+                    <i data-lucide="sparkles" class="w-4 h-4 mb-1 shrink-0"></i>
+                    <span class="text-[9.5px] font-semibold truncate max-w-full">Gustos</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ========================================================= -->
+        <!-- MODALES Y LIGHTBOX                                        -->
+        <!-- ========================================================= -->
+        <div id="modal-overlay" class="fixed inset-0 bg-ink-900/60 backdrop-blur-xs z-40 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+
+            <!-- Modal 1: Día del Calendario -->
+            <div id="modal-calendar-day" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <div class="min-w-0 flex-1">
+                        <span id="cal-modal-badge" class="hidden text-[10px] font-bold uppercase tracking-wider text-gold-500 bg-gold-100 px-2 py-0.5 rounded-full mb-1 inline-block">✨ Día 28 · Mesversario</span>
+                        <h3 id="cal-modal-date-title" class="font-serif text-xl font-bold text-ink-900 capitalize truncate">Lunes, 28</h3>
+                    </div>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+
+                <div id="cal-day-events-list" class="space-y-2.5"></div>
+
+                <form id="form-cal-event" novalidate class="pt-3 border-t border-cream-200 space-y-3">
+                    <input type="hidden" id="cal-selected-date-iso">
+                    <p class="text-xs font-bold text-ink-900">Añadir plan para este día:</p>
+                    <div>
+                        <input type="text" id="cal-event-title" placeholder="¿Qué vamos a hacer? Ej. Cenar juntos, paseo..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div class="min-w-0">
+                            <label class="block text-[11px] font-semibold text-ink-800/80 mb-1">Hora (opcional)</label>
+                            <input type="time" id="cal-event-time" class="w-full px-3 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-[11px] font-semibold text-ink-800/80 mb-1">Quién lo propone</label>
+                            <select id="cal-event-author" class="w-full px-3 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="p1">Rubén</option>
+                                <option value="p2">Mar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <input type="text" id="cal-event-place" placeholder="Lugar (opcional)" class="w-full px-3.5 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        <input type="text" id="cal-event-notes" placeholder="Notas extra (opcional)" class="w-full px-3.5 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Guardar en el calendario
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 2A: Subir Fotos Locales a la Galería -->
+            <div id="modal-upload-photo" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <div class="min-w-0 flex-1">
+                        <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Guardar Recuerdo</h3>
+                        <p id="upload-count-subtitle" class="text-xs text-ink-800/70">1 foto seleccionada</p>
+                    </div>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+
+                <div id="upload-previews-strip" class="flex gap-2.5 overflow-x-auto no-scrollbar py-1"></div>
+
+                <form id="form-upload-photo" novalidate class="space-y-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Pie de foto</label>
+                        <input type="text" id="photo-caption" placeholder="Ej. Tarde de risas juntos, nuestra escapada..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Fecha</label>
+                            <input type="date" id="photo-date" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Etiqueta</label>
+                            <select id="photo-tag" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="Cita">🍷 Cita</option>
+                                <option value="Viaje">✈️ Viaje</option>
+                                <option value="Día especial">✨ Día especial</option>
+                                <option value="Cotidiano">☕ Cotidiano</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Lugar (opcional)</label>
+                            <input type="text" id="photo-place" placeholder="Ej. Playa, centro..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Subido por</label>
+                            <select id="photo-uploader" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="p1">Rubén</option>
+                                <option value="p2">Mar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Guardar en la galería
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 2B: Añadir Foto por URL -->
+            <div id="modal-photo-url" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Añadir foto por enlace</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <form id="form-photo-url" novalidate class="space-y-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Enlace (URL) de la imagen</label>
+                        <input type="url" id="photo-url-input" placeholder="https://..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Descripción / pie de foto</label>
+                        <input type="text" id="photo-url-caption" placeholder="Ej. Recuerdo especial juntos..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Fecha</label>
+                            <input type="date" id="photo-url-date" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Etiqueta</label>
+                            <select id="photo-url-tag" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="Cita">🍷 Cita</option>
+                                <option value="Viaje">✈️ Viaje</option>
+                                <option value="Día especial">✨ Día especial</option>
+                                <option value="Cotidiano">☕ Cotidiano</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Guardar imagen en galería
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 3: Lightbox Pantalla Completa de Galería -->
+            <div id="modal-lightbox" class="modal-box hidden w-full max-w-lg bg-ink-900 text-cream-50 rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl space-y-4 max-h-[94vh] overflow-y-auto">
+                <div class="flex items-center justify-between">
+                    <span id="lightbox-counter" class="text-xs font-semibold text-cream-200/75">1 / 1</span>
+                    <div class="flex items-center gap-2">
+                        <button type="button" id="lightbox-fav-btn" onclick="toggleLightboxFavorite()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition">
+                            <i data-lucide="heart" class="w-4 h-4"></i>
+                        </button>
+                        <button type="button" onclick="deleteLightboxPhoto()" class="p-2 rounded-full bg-white/10 hover:bg-terracotta-500/80 transition" title="Eliminar foto">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                        <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative rounded-2xl overflow-hidden bg-black/40 flex items-center justify-center min-h-[260px] max-h-[56vh]">
+                    <img id="lightbox-img" src="" alt="" onerror="this.src='https://placehold.co/600x450/3B2F2B/FAF7F2?text=Recuerdo'" class="max-h-[56vh] w-full object-contain">
+                    <button type="button" onclick="stepLightbox(-1)" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-ink-900/70 hover:bg-ink-900 text-white flex items-center justify-center transition">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button type="button" onclick="stepLightbox(1)" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-ink-900/70 hover:bg-ink-900 text-white flex items-center justify-center transition">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-1.5 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span id="lightbox-tag" class="text-[10px] font-bold uppercase tracking-wider bg-terracotta-500/30 text-terracotta-200 px-2.5 py-0.5 rounded-full"></span>
+                        <span id="lightbox-date" class="text-xs text-cream-200/70"></span>
+                        <span id="lightbox-place" class="text-xs text-cream-200/70"></span>
+                    </div>
+                    <p id="lightbox-caption" class="font-serif text-lg text-cream-50 break-words"></p>
+                    <p id="lightbox-uploader" class="text-[11px] text-cream-200/60"></p>
+                </div>
+            </div>
+
+            <!-- Modal 4A: Redactar Nota -->
+            <div id="modal-send-note" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="w-8 h-8 rounded-xl bg-terracotta-100 text-terracotta-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="pen-square" class="w-4 h-4"></i>
+                        </span>
+                        <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Redactar nota</h3>
+                    </div>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-cream-200 divide-y divide-cream-100 text-xs">
+                    <div class="px-3.5 py-2.5 flex items-center justify-between gap-2">
+                        <span class="font-semibold text-ink-800/60">De:</span>
+                        <span id="compose-from-label" class="font-bold text-ink-900 bg-cream-100 px-2.5 py-0.5 rounded-full truncate">Rubén</span>
+                    </div>
+                    <div class="px-3.5 py-2.5 flex items-center justify-between gap-2">
+                        <span class="font-semibold text-ink-800/60">Para:</span>
+                        <span id="compose-to-label" class="font-bold text-terracotta-600 bg-terracotta-50 px-2.5 py-0.5 rounded-full truncate">Mar ❤️</span>
+                    </div>
+                </div>
+
+                <form id="form-send-note" novalidate class="space-y-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Asunto (opcional)</label>
+                            <input type="text" id="note-subject" placeholder="Ej. Pensando en ti..." class="w-full px-3.5 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Etiqueta</label>
+                            <select id="note-tag" class="w-full px-3 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="❤️ Carta de amor">❤️ Carta de amor</option>
+                                <option value="🥺 Te echo de menos">🥺 Te echo de menos</option>
+                                <option value="🌷 Gracias por...">🌷 Gracias por...</option>
+                                <option value="✨ Recuerdo">✨ Recuerdo</option>
+                                <option value="🎁 Sorpresa">🎁 Sorpresa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Mensaje</label>
+                        <textarea id="note-body" rows="5" placeholder="Escribe aquí tu nota..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        Enviar nota
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 4B: Vista de Lectura de Nota -->
+            <div id="modal-read-note" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <button type="button" onclick="closeAllModals()" class="flex items-center gap-1.5 text-xs font-semibold text-ink-800/80 hover:text-ink-900">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        Volver al buzón
+                    </button>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button type="button" id="read-note-star-btn" onclick="toggleReadModalStar()" title="Favorita" class="p-2 rounded-full bg-white hover:bg-gold-50 border border-cream-200 transition">
+                            <i data-lucide="star" class="w-4 h-4 text-ink-800/40"></i>
+                        </button>
+                        <button type="button" onclick="deleteReadModalNote()" title="Eliminar nota" class="p-2 rounded-full bg-white hover:bg-terracotta-50 border border-cream-200 text-ink-800/60 hover:text-terracotta-600 transition">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-3 min-w-0">
+                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                        <span id="read-note-tag" class="text-[11px] font-semibold bg-terracotta-50 text-terracotta-600 px-2.5 py-0.5 rounded-full"></span>
+                        <span id="read-note-status-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-sage-50 text-sage-700"></span>
+                    </div>
+
+                    <h3 id="read-note-subject" class="font-serif text-2xl font-bold text-ink-900 leading-snug break-words"></h3>
+
+                    <div class="bg-white rounded-2xl p-3.5 border border-cream-200 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                            <div id="read-note-avatar" class="w-9 h-9 rounded-full bg-terracotta-500 text-white font-serif font-bold flex items-center justify-center shrink-0"></div>
+                            <div class="min-w-0 flex-1">
+                                <p id="read-note-sender-line" class="text-xs font-bold text-ink-900 truncate"></p>
+                                <p id="read-note-recipient-line" class="text-[11px] text-ink-800/65 truncate"></p>
+                            </div>
+                        </div>
+                        <span id="read-note-date" class="text-[11px] text-ink-800/60 text-right shrink-0"></span>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-5 border border-cream-200 shadow-xs">
+                        <p id="read-note-body" class="font-serif text-[17px] sm:text-[18px] text-ink-900 leading-relaxed whitespace-pre-line break-words"></p>
+                    </div>
+                </div>
+
+                <div id="read-note-reply-bar" class="pt-1">
+                    <button type="button" onclick="replyToCurrentNote()" class="w-full py-3 rounded-2xl bg-ink-900 hover:bg-ink-800 text-cream-50 font-semibold text-xs shadow-sm transition flex items-center justify-center gap-2">
+                        <i data-lucide="reply" class="w-4 h-4"></i>
+                        Responder a esta nota
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal 5: Añadir Plan -->
+            <div id="modal-new-plan" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Añadir Plan</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <form id="form-new-plan" novalidate class="space-y-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Tipo de plan</label>
+                        <select id="plan-status-select" onchange="togglePlanDoneFields()" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                            <option value="pending">✨ Nuevo plan (por hacer)</option>
+                            <option value="done">✅ Ya realizado (añadir al registro histórico)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Título del plan</label>
+                        <input type="text" id="plan-title" placeholder="Ej. Escapada de fin de semana, cenar sushi..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Categoría</label>
+                        <select id="plan-category" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                            <option value="Cena">🍷 Cena</option>
+                            <option value="Viaje">✈️ Viaje</option>
+                            <option value="Escapada">🌄 Escapada</option>
+                            <option value="Cine">🎬 Cine</option>
+                            <option value="Casa">🏡 Casa</option>
+                            <option value="Otro">✨ Otro</option>
+                        </select>
+                    </div>
+                    <div id="plan-done-extra-fields" class="hidden space-y-3 pt-1">
+                        <div>
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Fecha en que lo hicisteis</label>
+                            <input type="date" id="plan-done-date" class="w-full px-3 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Recuerdo o valoración</label>
+                            <textarea id="plan-done-memory" rows="2" placeholder="¿Cómo fue ese día?" class="w-full px-3.5 py-2 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500"></textarea>
+                        </div>
+                    </div>
+                    <div id="plan-pending-notes-field">
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Notas o detalles (opcional)</label>
+                        <input type="text" id="plan-notes" placeholder="Ej. Ir un sábado por la tarde..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Guardar plan
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 6: Completar Plan Nuevo -> Registro de Hechos -->
+            <div id="modal-complete-plan" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Pasar a Registro de Hechos</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <p id="complete-plan-title-display" class="text-sm font-semibold text-terracotta-600 bg-terracotta-50 p-3 rounded-xl border border-terracotta-200/70 break-words"></p>
+                <form id="form-complete-plan" novalidate class="space-y-3.5">
+                    <input type="hidden" id="complete-plan-id">
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Fecha en la que se hizo</label>
+                        <input type="date" id="complete-plan-date" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Recuerdo o valoración</label>
+                        <textarea id="complete-plan-memory" rows="3" placeholder="Escribe un recuerdo de este plan..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-sage-600 hover:bg-sage-700 text-white font-semibold text-sm shadow-md transition">
+                        Guardar en registro de hechos ✅
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 7: Agendar Plan Nuevo en el Calendario -->
+            <div id="modal-schedule-plan" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Agendar en el Calendario</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <p id="schedule-plan-title-display" class="text-sm font-semibold text-sage-700 bg-sage-50 p-3 rounded-xl border border-sage-500/30 break-words"></p>
+                <form id="form-schedule-plan" novalidate class="space-y-3.5">
+                    <input type="hidden" id="schedule-plan-id">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Elige el día</label>
+                            <input type="date" id="schedule-plan-date" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Hora (opcional)</label>
+                            <input type="time" id="schedule-plan-time" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Lugar (opcional)</label>
+                        <input type="text" id="schedule-plan-place" placeholder="¿Dónde quedamos?" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Añadir al calendario 📅
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 8: Añadir / Editar Gusto o Detalle -->
+            <div id="modal-like-item" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 id="like-modal-title" class="font-serif text-xl font-bold text-ink-900 truncate">Añadir Gusto o Detalle</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <form id="form-like-item" novalidate class="space-y-3.5">
+                    <input type="hidden" id="like-editing-id">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">¿De quién es?</label>
+                            <select id="like-person" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="p2">Mar</option>
+                                <option value="p1">Rubén</option>
+                            </select>
+                        </div>
+                        <div class="min-w-0">
+                            <label class="block text-xs font-semibold text-ink-800 mb-1">Categoría</label>
+                            <select id="like-category" class="w-full px-3 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                                <option value="Comida y dulce">🍫 Comida y dulce</option>
+                                <option value="Regalos e ideas">🎁 Regalos e ideas</option>
+                                <option value="Canciones y pelis">🎵 Canciones y pelis</option>
+                                <option value="Tallas y medidas">👕 Tallas y medidas</option>
+                                <option value="Manías y curiosidades">✨ Manías y curiosidades</option>
+                                <option value="Favoritos">❤️ Favoritos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Título o concepto</label>
+                        <input type="text" id="like-title" placeholder="Ej. Chocolate favorito, talla de anillo, flor..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Detalle o descripción</label>
+                        <textarea id="like-detail" rows="3" placeholder="Ej. Kinder Bueno blanco o chocolate con almendras..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Guardar detalle ✨
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 9: Editar Nombres -->
+            <div id="modal-profile" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Ajustes de Pareja</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <form id="form-profile" novalidate class="space-y-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Nombre visible para usuario rmozos</label>
+                        <input type="text" id="input-p1-name" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-ink-800 mb-1">Nombre visible para usuario Mdiaz</label>
+                        <input type="text" id="input-p2-name" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-terracotta-500">
+                    </div>
+                    <p class="text-[11px] text-ink-800/70 bg-cream-100 p-3 rounded-xl">
+                        Inicio de vuestra historia: <strong>28 de febrero de 2025 a las 12:00</strong>.
+                    </p>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-semibold text-sm shadow-md transition">
+                        Guardar nombres
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal 10: Respaldo JSON para Sincronizar entre Dispositivos -->
+            <div id="modal-sync" class="modal-box hidden w-full max-w-md bg-cream-50 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+                <div class="flex items-center justify-between gap-2 border-b border-cream-200 pb-3">
+                    <h3 class="font-serif text-xl font-bold text-ink-900 truncate">Respaldo y Sincronización</h3>
+                    <button type="button" onclick="closeAllModals()" class="p-2 rounded-full bg-cream-200/70 text-ink-800 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <p class="text-xs text-ink-800/80 leading-relaxed">
+                    Vuestros datos se guardan automáticamente en este dispositivo. Si queréis pasar todas vuestras notas, fotos, planes y gustos al móvil del otro, exportad el respaldo JSON e importadlo allí:
+                </p>
+
+                <div class="grid grid-cols-2 gap-2.5 items-stretch">
+                    <button type="button" onclick="exportBackupJSON()" class="h-full py-3 px-3 rounded-2xl bg-terracotta-500 hover:bg-terracotta-600 text-white text-xs font-bold shadow-sm transition flex flex-col items-center justify-center gap-1.5 text-center">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Exportar respaldo (.json)</span>
+                    </button>
+
+                    <label for="import-json-input" class="h-full cursor-pointer py-3 px-3 rounded-2xl bg-white hover:bg-cream-100 border border-cream-300 text-ink-900 text-xs font-bold shadow-xs transition flex flex-col items-center justify-center gap-1.5 text-center">
+                        <i data-lucide="upload" class="w-4 h-4 text-sage-600"></i>
+                        <span>Importar respaldo (.json)</span>
+                    </label>
+                    <input type="file" id="import-json-input" accept="application/json,.json" class="hidden">
+                </div>
+
+                <div class="bg-white p-3.5 rounded-2xl border border-cream-300 flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <span class="text-[10px] uppercase tracking-wider text-ink-800/60 block">Identificador de Rincón</span>
+                        <code id="sync-code-display" class="text-xs sm:text-sm font-bold text-terracotta-600 select-all truncate block">RUBEN-MAR-280225</code>
+                    </div>
+                    <button type="button" onclick="copyCoupleCode()" class="px-3 py-2 rounded-xl bg-terracotta-100 hover:bg-terracotta-200 text-terracotta-700 text-xs font-semibold flex items-center gap-1.5 transition shrink-0">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        Copiar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Notificación Toast -->
+        <div id="toast-box" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-ink-900 text-cream-50 text-xs font-medium px-4 py-2.5 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 flex items-center gap-2 max-w-[90vw]">
+            <i data-lucide="heart" class="w-3.5 h-3.5 text-terracotta-400 fill-current shrink-0"></i>
+            <span id="toast-text" class="truncate">Guardado</span>
+        </div>
+
+    </div>
+
+    <script>
+        // ==========================================================
+        // 1. AUTENTICACIÓN PRIVADA Y PERSISTENCIA DE SESIÓN
+        // ==========================================================
+        const AUTHORIZED_USERS = {
+            mdiaz: {
+                username: "Mdiaz",
+                password: "05092005",
+                role: "p2" // Mar
+            },
+            rmozos: {
+                username: "rmozos",
+                password: "05092003",
+                role: "p1" // Rubén
+            }
+        };
+
+        const AUTH_SESSION_KEY = "nuestro_rincon_auth_session_v2";
+        const LOCAL_STORAGE_KEY = "nuestro_rincon_state_v6";
+        const START_DATE = new Date(2025, 1, 28, 12, 0, 0); // 28 feb 2025, 12:00
+
+        const MESES_ES = [
+            "enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        ];
+        const DIAS_SEMANA_ES = [
+            "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"
+        ];
+        const CATEGORY_EMOJIS = {
+            "Comida y dulce": "🍫",
+            "Regalos e ideas": "🎁",
+            "Canciones y pelis": "🎵",
+            "Tallas y medidas": "👕",
+            "Manías y curiosidades": "✨",
+            "Favoritos": "❤️"
+        };
+
+        function getTodayISO() {
+            const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        }
+
+        function getNext28ISO() {
+            const now = new Date();
+            let y = now.getFullYear();
+            let m = now.getMonth();
+            if (now.getDate() > 28) {
+                m += 1;
+                if (m > 11) { m = 0; y += 1; }
+            }
+            return `${y}-${String(m + 1).padStart(2, '0')}-28`;
+        }
+
+        function formatDateES(isoStr) {
+            if (!isoStr) return "";
+            const parts = isoStr.split('-').map(Number);
+            if (parts.length !== 3 || parts.some(isNaN)) return isoStr;
+            const [y, m, d] = parts;
+            return `${d} de ${MESES_ES[m - 1]} de ${y}`;
+        }
+
+        function createDefaultMemoryArt(bg1, bg2, emoji, label) {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+                <defs>
+                    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="${bg1}"/>
+                        <stop offset="100%" stop-color="${bg2}"/>
+                    </linearGradient>
+                </defs>
+                <rect width="600" height="600" fill="url(#g)"/>
+                <circle cx="480" cy="120" r="140" fill="rgba(255,255,255,0.14)"/>
+                <circle cx="120" cy="490" r="170" fill="rgba(255,255,255,0.1)"/>
+                <text x="300" y="285" font-size="110" text-anchor="middle" dominant-baseline="middle">${emoji}</text>
+                <text x="300" y="405" font-family="Georgia, serif" font-size="26" fill="#FAF7F2" text-anchor="middle" opacity="0.9">${label}</text>
+            </svg>`;
+            return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+        }
+
+        const INITIAL_STATE = {
+            names: { p1: "Rubén", p2: "Mar" },
+            calendarEvents: [
+                {
+                    id: "ev-1",
+                    date: getTodayISO(),
+                    time: "21:00",
+                    title: "Cena especial y peli juntos",
+                    place: "En casa",
+                    notes: "Preparar algo rico para cenar",
+                    author: "p1"
+                },
+                {
+                    id: "ev-2",
+                    date: getNext28ISO(),
+                    time: "12:00",
+                    title: "¡Celebrar nuestro mesversario! ❤️",
+                    place: "Nuestro sitio favorito",
+                    notes: "Brindar por otro mes más juntos",
+                    author: "p2"
+                }
+            ],
+            photos: [
+                {
+                    id: "photo-1",
+                    dataUrl: createDefaultMemoryArt("#C97B63", "#3B2F2B", "🌅", "Nuestro comienzo · 28 Feb"),
+                    caption: "El día que empezó todo a las 12:00",
+                    date: "2025-02-28",
+                    tag: "Día especial",
+                    place: "Nuestro rincón",
+                    uploader: "p2",
+                    favorite: true
+                },
+                {
+                    id: "photo-2",
+                    dataUrl: createDefaultMemoryArt("#6B8E78", "#261D1A", "🍷", "Noche de cita juntos"),
+                    caption: "Cena perfecta y mil risas",
+                    date: getTodayISO(),
+                    tag: "Cita",
+                    place: "Restaurante favorito",
+                    uploader: "p1",
+                    favorite: false
+                }
+            ],
+            notes: [
+                {
+                    id: "note-welcome-mar",
+                    sender: "p1",
+                    recipient: "p2",
+                    subject: "Para ti, mi amor ❤️",
+                    tag: "🎁 Sorpresa",
+                    body: "Hola mi amor, esto lo llevo haciendo varios días y quería que fuera para una parte de tu regalo de navidad, pero no he podido aguantar las ganas de enseñártelo y poder disfrutar los dos de esta app.\nTe quiero mucho mi amor.",
+                    date: "Regalo especial",
+                    read: false,
+                    favorite: true
+                }
+            ],
+            plans: [
+                {
+                    id: "plan-1",
+                    title: "Ver el atardecer con un picnic",
+                    category: "Escapada",
+                    notes: "Llevar algo rico para picar y música",
+                    done: false,
+                    doneDate: "",
+                    memory: ""
+                },
+                {
+                    id: "plan-2",
+                    title: "Escapada de fin de semana juntos",
+                    category: "Viaje",
+                    notes: "Buscar una casa rural o hotel con encanto",
+                    done: false,
+                    doneDate: "",
+                    memory: ""
+                },
+                {
+                    id: "plan-3",
+                    title: "Nuestro primer día oficial juntos",
+                    category: "Otro",
+                    notes: "",
+                    done: true,
+                    doneDate: "2025-02-28",
+                    memory: "El comienzo de nuestra historia a las 12:00 de la mañana. Inolvidable."
+                }
+            ],
+            likes: [
+                {
+                    id: "like-1",
+                    person: "p2",
+                    category: "Comida y dulce",
+                    title: "Dulce y capricho favorito",
+                    detail: "Chocolate con leche o algo dulce para compartir viendo una peli."
+                },
+                {
+                    id: "like-2",
+                    person: "p1",
+                    category: "Comida y dulce",
+                    title: "Comida preferida para cenar",
+                    detail: "Una buena hamburguesa casera o sushi juntos."
+                },
+                {
+                    id: "like-3",
+                    person: "p2",
+                    category: "Regalos e ideas",
+                    title: "Detalles que siempre aciertan",
+                    detail: "Una carta escrita a mano, flores o una foto nuestra impresa."
+                },
+                {
+                    id: "like-4",
+                    person: "p1",
+                    category: "Canciones y pelis",
+                    title: "Plan de sofá y manta",
+                    detail: "Maratón de pelis o serie juntos con palomitas."
+                }
+            ]
+        };
+
+        function loadLocalState() {
+            try {
+                const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+                if (!raw) return JSON.parse(JSON.stringify(INITIAL_STATE));
+                const parsed = JSON.parse(raw);
+                const mergedNames = {
+                    ...JSON.parse(JSON.stringify(INITIAL_STATE.names)),
+                    ...(parsed.names || {})
+                };
+                if (!mergedNames.p1 || mergedNames.p1.toLowerCase() === "rmozos") {
+                    mergedNames.p1 = "Rubén";
+                }
+                if (!mergedNames.p2 || mergedNames.p2.toLowerCase() === "mdiaz") {
+                    mergedNames.p2 = "Mar";
+                }
+                return {
+                    ...JSON.parse(JSON.stringify(INITIAL_STATE)),
+                    ...parsed,
+                    names: mergedNames
+                };
+            } catch (e) {
+                console.warn("Error cargando estado local:", e);
+                return JSON.parse(JSON.stringify(INITIAL_STATE));
+            }
+        }
+
+        function persistState() {
+            try {
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
+            } catch (e) {
+                console.warn("Error guardando estado local:", e);
+                showToast("Aviso: límite de espacio alcanzado en el navegador");
+            }
+            renderAll();
+        }
+
+        let currentAuthRole = null;
+        let state = loadLocalState();
+        let calViewYear = new Date().getFullYear();
+        let calViewMonth = new Date().getMonth();
+        let currentGalleryFilter = "todas";
+        let currentMailboxFolder = "inbox";
+        let activeReadNoteId = null;
+        let currentPlansSubtab = "pending";
+        let currentLikesPersonFilter = "todos";
+        let currentLikesCategoryFilter = "todas";
+        let pendingCompressedPhotos = [];
+        let lightboxPhotoList = [];
+        let lightboxIndex = 0;
+        let celebratedConfettiToday = false;
+        let counterIntervalId = null;
+
+        function checkSavedSession() {
+            try {
+                const raw = sessionStorage.getItem(AUTH_SESSION_KEY) || localStorage.getItem(AUTH_SESSION_KEY);
+                if (!raw) return null;
+                const parsed = JSON.parse(raw);
+                if (parsed && (parsed.role === "p1" || parsed.role === "p2")) {
+                    return parsed.role;
+                }
+            } catch (e) {
+                console.warn("Error leyendo sesión:", e);
+            }
+            return null;
+        }
+
+        function saveSession(role, remember) {
+            try {
+                const payload = JSON.stringify({ role, loggedAt: Date.now() });
+                sessionStorage.setItem(AUTH_SESSION_KEY, payload);
+                if (remember) {
+                    localStorage.setItem(AUTH_SESSION_KEY, payload);
+                } else {
+                    localStorage.removeItem(AUTH_SESSION_KEY);
+                }
+            } catch (e) {
+                console.warn("Error guardando sesión:", e);
+            }
+        }
+
+        function clearSession() {
+            try {
+                sessionStorage.removeItem(AUTH_SESSION_KEY);
+                localStorage.removeItem(AUTH_SESSION_KEY);
+            } catch (e) {
+                console.warn("Error limpiando sesión:", e);
+            }
+            currentAuthRole = null;
+            if (counterIntervalId) {
+                clearInterval(counterIntervalId);
+                counterIntervalId = null;
+            }
+        }
+
+        function unlockAppForRole(role) {
+            currentAuthRole = role;
+            const loginScreen = document.getElementById('login-screen');
+            const appShell = document.getElementById('app-shell');
+            if (loginScreen) loginScreen.classList.add('hidden');
+            if (appShell) appShell.classList.remove('hidden');
+
+            const calAuthor = document.getElementById('cal-event-author');
+            const photoUp = document.getElementById('photo-uploader');
+            const likePerson = document.getElementById('like-person');
+            if (calAuthor) calAuthor.value = role;
+            if (photoUp) photoUp.value = role;
+            if (likePerson) likePerson.value = role;
+
+            renderAll();
+            if (!counterIntervalId) {
+                counterIntervalId = setInterval(updateCounterAndAnniversaries, 1000);
+            }
+        }
+
+        function handleLoginAttempt(event) {
+            if (event && typeof event.preventDefault === 'function') {
+                event.preventDefault();
+            }
+            const userInput = document.getElementById('login-username');
+            const passInput = document.getElementById('login-password');
+            const rememberInput = document.getElementById('login-remember');
+            const errorBox = document.getElementById('login-error-box');
+            const errorText = document.getElementById('login-error-text');
+            const loginCard = document.getElementById('login-card');
+
+            const normalizedUser = (userInput ? userInput.value : "").trim().toLowerCase();
+            const rawPass = (passInput ? passInput.value : "").trim();
+            const remember = Boolean(rememberInput && rememberInput.checked);
+
+            const account = AUTHORIZED_USERS[normalizedUser];
+            if (account && account.password === rawPass) {
+                if (errorBox) errorBox.classList.add('hidden');
+                if (passInput) passInput.value = "";
+                saveSession(account.role, remember);
+                unlockAppForRole(account.role);
+                const displayName = account.role === "p2" ? state.names.p2 : state.names.p1;
+                showToast(`¡Hola, ${displayName}! Bienvenido/a a Nuestro Rincón ❤️`);
+            } else {
+                if (errorText) {
+                    errorText.textContent = "Usuario o contraseña incorrectos. Este espacio es privado.";
+                }
+                if (errorBox) errorBox.classList.remove('hidden');
+                if (loginCard) {
+                    loginCard.classList.remove('shake-anim');
+                    void loginCard.offsetWidth;
+                    loginCard.classList.add('shake-anim');
+                }
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+        }
+
+        // ==========================================================
+        // 2. CONTADOR EN TIEMPO REAL, ANIVERSARIOS E HITOS
+        // ==========================================================
+        function updateCounterAndAnniversaries() {
+            const appShell = document.getElementById('app-shell');
+            if (!appShell || appShell.classList.contains('hidden')) return;
+
+            const now = new Date();
+            const diffMs = Math.max(0, now.getTime() - START_DATE.getTime());
+
+            const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const remAfterDays = diffMs % (1000 * 60 * 60 * 24);
+            const hours = Math.floor(remAfterDays / (1000 * 60 * 60));
+            const minutes = Math.floor((remAfterDays % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remAfterDays % (1000 * 60)) / 1000);
+
+            document.getElementById('counter-total-days').textContent = totalDays.toLocaleString('es-ES');
+            document.getElementById('counter-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('counter-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('counter-seconds').textContent = String(seconds).padStart(2, '0');
+
+            // Cálculo de meses y días exactos desde 28 de febrero de 2025 a las 12:00
+            let monthsDiff = (now.getFullYear() - START_DATE.getFullYear()) * 12 + (now.getMonth() - START_DATE.getMonth());
+            let anchorDate = new Date(START_DATE.getFullYear(), START_DATE.getMonth() + monthsDiff, 28, 12, 0, 0);
+            if (now < anchorDate) {
+                monthsDiff = Math.max(0, monthsDiff - 1);
+                anchorDate = new Date(START_DATE.getFullYear(), START_DATE.getMonth() + monthsDiff, 28, 12, 0, 0);
+            }
+            const daysSinceAnchor = Math.max(0, Math.floor((now.getTime() - anchorDate.getTime()) / (1000 * 60 * 60 * 24)));
+
+            const yearsCompleted = Math.floor(monthsDiff / 12);
+            const remMonths = monthsDiff % 12;
+
+            const summaryParts = [];
+            if (yearsCompleted > 0) summaryParts.push(`${yearsCompleted} ${yearsCompleted === 1 ? 'año' : 'años'}`);
+            if (remMonths > 0) summaryParts.push(`${remMonths} ${remMonths === 1 ? 'mes' : 'meses'}`);
+            summaryParts.push(`${daysSinceAnchor} ${daysSinceAnchor === 1 ? 'día' : 'días'}`);
+            document.getElementById('counter-ym-summary').textContent = `${summaryParts.join(', ')} de historia juntos`;
+
+            // Detección de hoy: ¿Es 28 de febrero (aniversario) o día 28 (mesversario)?
+            const banner = document.getElementById('anniversary-banner');
+            const isFeb28 = now.getMonth() === 1 && now.getDate() === 28 && now >= START_DATE;
+            const isDay28 = now.getDate() === 28 && now >= START_DATE;
+
+            if (isFeb28 && yearsCompleted >= 1) {
+                banner.classList.remove('hidden');
+                document.getElementById('anniversary-badge').textContent = "🎉 ¡Aniversario anual!";
+                document.getElementById('anniversary-title').textContent = `¡Hoy cumplís ${yearsCompleted} ${yearsCompleted === 1 ? 'año' : 'años'} juntos!`;
+                document.getElementById('anniversary-desc').textContent = `Desde aquel 28 de febrero de 2025 a las 12:00. ¡Feliz aniversario, ${state.names.p1} y ${state.names.p2}!`;
+                triggerDailyConfetti();
+            } else if (isDay28 && monthsDiff >= 1) {
+                banner.classList.remove('hidden');
+                document.getElementById('anniversary-badge').textContent = "✨ ¡Hoy es día 28!";
+                document.getElementById('anniversary-title').textContent = `¡Hoy hacéis ${monthsDiff} ${monthsDiff === 1 ? 'mes' : 'meses'} juntos!`;
+                document.getElementById('anniversary-desc').textContent = `Cada día 28 se suma un mes más a vuestra historia. ¡A disfrutarlo!`;
+                triggerDailyConfetti();
+            } else {
+                banner.classList.add('hidden');
+            }
+
+            // Cuenta atrás para el siguiente día 28 a las 12:00
+            let nextMonthTarget = new Date(now.getFullYear(), now.getMonth(), 28, 12, 0, 0);
+            if (now >= nextMonthTarget) {
+                nextMonthTarget = new Date(now.getFullYear(), now.getMonth() + 1, 28, 12, 0, 0);
+            }
+            const msToMonth = Math.max(0, nextMonthTarget.getTime() - now.getTime());
+            const dToMonth = Math.floor(msToMonth / (1000 * 60 * 60 * 24));
+            const hToMonth = Math.floor((msToMonth % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('next-month-countdown').textContent = `${dToMonth}d ${hToMonth}h`;
+            document.getElementById('next-month-label').textContent = `${nextMonthTarget.getDate()} de ${MESES_ES[nextMonthTarget.getMonth()]} · 12:00`;
+
+            // Cuenta atrás para el siguiente 28 de febrero a las 12:00
+            let nextYearTarget = new Date(now.getFullYear(), 1, 28, 12, 0, 0);
+            if (now >= nextYearTarget) {
+                nextYearTarget = new Date(now.getFullYear() + 1, 1, 28, 12, 0, 0);
+            }
+            const msToYear = Math.max(0, nextYearTarget.getTime() - now.getTime());
+            const dToYear = Math.floor(msToYear / (1000 * 60 * 60 * 24));
+            document.getElementById('next-year-countdown').textContent = `${dToYear} ${dToYear === 1 ? 'día' : 'días'}`;
+            document.getElementById('next-year-label').textContent = `28 feb ${nextYearTarget.getFullYear()} · 12:00`;
+
+            renderMilestonesHistory(monthsDiff, now);
+        }
+
+        function triggerDailyConfetti() {
+            if (celebratedConfettiToday) return;
+            celebratedConfettiToday = true;
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 65,
+                    spread: 70,
+                    origin: { y: 0.65 },
+                    colors: ['#C97B63', '#D4A359', '#6B8E78', '#FAF7F2']
+                });
+            }
+        }
+
+        function renderMilestonesHistory(monthsDiff, now) {
+            const listEl = document.getElementById('milestones-list');
+            const subEl = document.getElementById('milestones-count-subtitle');
+            const completed = [];
+
+            for (let m = 1; m <= monthsDiff; m++) {
+                const milestoneDate = new Date(START_DATE.getFullYear(), START_DATE.getMonth() + m, 28, 12, 0, 0);
+                if (milestoneDate <= now) {
+                    const isYear = m % 12 === 0;
+                    const yrNum = m / 12;
+                    completed.push({
+                        m,
+                        isYear,
+                        title: isYear ? `🎉 ${yrNum} ${yrNum === 1 ? 'Año' : 'Años'} juntos (${m} meses)` : `✨ ${m} ${m === 1 ? 'Mes' : 'Meses'} juntos`,
+                        dateText: `28 de ${MESES_ES[milestoneDate.getMonth()]} de ${milestoneDate.getFullYear()}`
+                    });
+                }
+            }
+
+            subEl.textContent = completed.length > 0
+                ? `${completed.length} ${completed.length === 1 ? 'hito cumplido' : 'hitos cumplidos'} desde feb 2025`
+                : "Próximo hito el 28 de marzo de 2025";
+
+            if (completed.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-ink-800/70 py-2">Aún no se ha cumplido el primer mes desde el 28 de febrero de 2025.</p>`;
+                return;
+            }
+
+            listEl.innerHTML = completed.reverse().map(item => `
+                <div class="flex items-center justify-between gap-2 py-2 px-3 rounded-2xl ${item.isYear ? 'bg-gold-50 border border-gold-400/40' : 'bg-cream-50'}">
+                    <span class="text-xs font-bold text-ink-900 min-w-0 break-words">${item.title}</span>
+                    <span class="text-[11px] text-ink-800/65 shrink-0">${item.dateText}</span>
+                </div>
+            `).join('');
+        }
+
+        window.toggleMilestonesHistory = function() {
+            const list = document.getElementById('milestones-list');
+            const chev = document.getElementById('milestones-chevron');
+            const isHidden = list.classList.contains('hidden');
+            list.classList.toggle('hidden', !isHidden);
+            chev.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        };
+
+        function renderHomePreviews() {
+            const todayISO = getTodayISO();
+            const upcoming = [...(state.calendarEvents || [])]
+                .filter(ev => ev.date >= todayISO)
+                .sort((a, b) => (a.date + (a.time || "00:00")).localeCompare(b.date + (b.time || "00:00")));
+
+            const titleEl = document.getElementById('home-next-plan-title');
+            const metaEl = document.getElementById('home-next-plan-meta');
+            if (upcoming.length > 0) {
+                const nextEv = upcoming[0];
+                titleEl.textContent = nextEv.title;
+                metaEl.textContent = `${formatDateES(nextEv.date)}${nextEv.time ? ` · ${nextEv.time}h` : ''}${nextEv.place ? ` · ${nextEv.place}` : ''}`;
+            } else {
+                titleEl.textContent = "Sin planes próximos agendados";
+                metaEl.textContent = "Toca para añadir algo especial en el calendario";
+            }
+
+            const recentEl = document.getElementById('home-recent-photos');
+            const photos = (state.photos || []).slice(0, 3);
+            if (photos.length === 0) {
+                recentEl.innerHTML = `<p class="col-span-3 text-xs text-ink-800/60 py-2">Aún no hay fotos subidas.</p>`;
+            } else {
+                recentEl.innerHTML = photos.map(p => `
+                    <button type="button" onclick="navigateTo('galeria'); setTimeout(() => openLightboxById('${p.id}'), 120);" class="group relative aspect-square rounded-2xl overflow-hidden bg-cream-100 border border-cream-200 shadow-xs">
+                        <img src="${p.dataUrl}" alt="${escapeHTML(p.caption)}" onerror="this.src='https://placehold.co/300x300/E7DEC8/261D1A?text=Foto'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </button>
+                `).join('');
+            }
+        }
+
+        // ==========================================================
+        // 3. CALENDARIO DE PLANES
+        // ==========================================================
+        window.changeCalendarMonth = function(delta) {
+            calViewMonth += delta;
+            if (calViewMonth < 0) { calViewMonth = 11; calViewYear -= 1; }
+            else if (calViewMonth > 11) { calViewMonth = 0; calViewYear += 1; }
+            renderCalendar();
+        };
+
+        window.goToCurrentMonth = function() {
+            const now = new Date();
+            calViewYear = now.getFullYear();
+            calViewMonth = now.getMonth();
+            renderCalendar();
+        };
+
+        function renderCalendar() {
+            document.getElementById('calendar-month-title').textContent = `${MESES_ES[calViewMonth]} ${calViewYear}`;
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = "";
+
+            const firstDay = new Date(calViewYear, calViewMonth, 1);
+            let startOffset = firstDay.getDay() - 1;
+            if (startOffset < 0) startOffset = 6;
+
+            const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+            const todayISO = getTodayISO();
+
+            for (let i = 0; i < startOffset; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = "h-12 rounded-2xl bg-cream-50/50";
+                grid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const iso = `${calViewYear}-${String(calViewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayEvents = (state.calendarEvents || []).filter(e => e.date === iso);
+                const isToday = iso === todayISO;
+                const is28 = day === 28;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `h-12 rounded-2xl flex flex-col items-center justify-center relative border transition active:scale-95 ${
+                    isToday
+                        ? 'bg-terracotta-500 text-white border-terracotta-600 font-bold shadow-xs'
+                        : is28
+                            ? 'bg-gold-50 text-ink-900 border-gold-400/70 font-semibold hover:bg-gold-100'
+                            : 'bg-cream-50/80 text-ink-900 border-cream-200/80 hover:bg-terracotta-50'
+                }`;
+                btn.onclick = () => openCalendarDayModal(iso);
+
+                const numSpan = document.createElement('span');
+                numSpan.className = "text-xs leading-none";
+                numSpan.textContent = day;
+                btn.appendChild(numSpan);
+
+                const dotsRow = document.createElement('div');
+                dotsRow.className = "flex items-center gap-1 mt-1";
+
+                if (dayEvents.length > 0) {
+                    const dot = document.createElement('span');
+                    dot.className = `w-1.5 h-1.5 rounded-full ${isToday ? 'bg-white' : 'bg-terracotta-500'}`;
+                    dotsRow.appendChild(dot);
+                }
+                if (is28) {
+                    const starDot = document.createElement('span');
+                    starDot.className = `w-1.5 h-1.5 rounded-full ${isToday ? 'bg-gold-100' : 'bg-gold-400'}`;
+                    dotsRow.appendChild(starDot);
+                }
+                btn.appendChild(dotsRow);
+                grid.appendChild(btn);
+            }
+
+            renderMonthEventsSummary();
+        }
+
+        function renderMonthEventsSummary() {
+            const prefix = `${calViewYear}-${String(calViewMonth + 1).padStart(2, '0')}-`;
+            const monthEvents = (state.calendarEvents || [])
+                .filter(e => e.date && e.date.startsWith(prefix))
+                .sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""));
+
+            const container = document.getElementById('calendar-month-events-list');
+            if (monthEvents.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white/75 rounded-3xl p-6 text-center border border-dashed border-cream-300">
+                        <p class="font-serif text-base text-ink-900">Sin planes en ${MESES_ES[calViewMonth]}</p>
+                        <p class="text-xs text-ink-800/70 mt-1">Toca cualquier día del calendario para agendar uno.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = monthEvents.map(ev => {
+                const authorName = ev.author === "p2" ? state.names.p2 : state.names.p1;
+                const dayNum = Number(ev.date.split('-')[2]);
+                return `
+                    <div onclick="openCalendarDayModal('${ev.date}')" class="cursor-pointer bg-white rounded-3xl p-3.5 shadow-card border border-cream-200 flex items-center justify-between gap-3 hover:border-terracotta-300 transition">
+                        <div class="flex items-center gap-3 min-w-0 flex-1">
+                            <div class="w-11 h-11 rounded-2xl bg-terracotta-50 text-terracotta-600 flex flex-col items-center justify-center shrink-0 border border-terracotta-200/60">
+                                <span class="text-sm font-bold leading-none">${dayNum}</span>
+                                <span class="text-[9px] uppercase font-semibold mt-0.5">${MESES_ES[calViewMonth].slice(0, 3)}</span>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-bold text-ink-900 truncate">${escapeHTML(ev.title)}</p>
+                                <p class="text-[11px] text-ink-800/70 truncate">
+                                    ${ev.time ? `${ev.time}h · ` : ''}${ev.place ? `${escapeHTML(ev.place)} · ` : ''}Propone ${escapeHTML(authorName)}
+                                </p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-ink-800/40 shrink-0"></i>
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        window.openCalendarDayModal = function(isoDate) {
+            const [y, m, d] = isoDate.split('-').map(Number);
+            const dateObj = new Date(y, m - 1, d);
+            const dayName = DIAS_SEMANA_ES[dateObj.getDay()];
+
+            document.getElementById('cal-selected-date-iso').value = isoDate;
+            document.getElementById('cal-modal-date-title').textContent = `${dayName}, ${d} de ${MESES_ES[m - 1]}`;
+            document.getElementById('cal-modal-badge').classList.toggle('hidden', d !== 28);
+            document.getElementById('cal-event-title').value = "";
+            document.getElementById('cal-event-time').value = "";
+            document.getElementById('cal-event-place').value = "";
+            document.getElementById('cal-event-notes').value = "";
+            document.getElementById('cal-event-author').value = currentAuthRole || "p1";
+
+            renderDayEventsInsideModal(isoDate);
+            openModal('modal-calendar-day');
+        };
+
+        function renderDayEventsInsideModal(isoDate) {
+            const listEl = document.getElementById('cal-day-events-list');
+            const dayEvents = (state.calendarEvents || []).filter(e => e.date === isoDate);
+
+            if (dayEvents.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-ink-800/65 bg-white p-3.5 rounded-2xl border border-cream-200">No hay planes anotados para este día todavía.</p>`;
+                return;
+            }
+
+            listEl.innerHTML = dayEvents.map(ev => {
+                const authorName = ev.author === "p2" ? state.names.p2 : state.names.p1;
+                return `
+                    <div class="bg-white p-3.5 rounded-2xl border border-cream-200 flex items-start justify-between gap-2">
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-bold text-ink-900 break-words">${escapeHTML(ev.title)}</p>
+                            <p class="text-[11px] text-ink-800/70 mt-0.5 break-words">
+                                ${ev.time ? `🕒 ${ev.time}h · ` : ''}${ev.place ? `📍 ${escapeHTML(ev.place)} · ` : ''}Por ${escapeHTML(authorName)}
+                            </p>
+                            ${ev.notes ? `<p class="text-xs text-ink-800/80 mt-1 italic break-words">${escapeHTML(ev.notes)}</p>` : ''}
+                        </div>
+                        <button type="button" onclick="deleteCalendarEvent('${ev.id}', '${isoDate}')" title="Borrar plan" class="p-1.5 text-ink-800/45 hover:text-terracotta-600 transition shrink-0">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        window.deleteCalendarEvent = function(eventId, isoDate) {
+            state.calendarEvents = (state.calendarEvents || []).filter(e => e.id !== eventId);
+            persistState();
+            renderDayEventsInsideModal(isoDate);
+            showToast("Plan eliminado del calendario");
+        };
+
+        document.getElementById('form-cal-event').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('cal-event-title').value.trim();
+            if (!title) {
+                showToast("Escribe qué plan vais a hacer");
+                return;
+            }
+            const isoDate = document.getElementById('cal-selected-date-iso').value;
+            const time = document.getElementById('cal-event-time').value;
+            const place = document.getElementById('cal-event-place').value.trim();
+            const notes = document.getElementById('cal-event-notes').value.trim();
+            const author = document.getElementById('cal-event-author').value;
+
+            state.calendarEvents.push({
+                id: 'ev-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+                date: isoDate,
+                time,
+                title,
+                place,
+                notes,
+                author
+            });
+
+            persistState();
+            renderDayEventsInsideModal(isoDate);
+            document.getElementById('cal-event-title').value = "";
+            document.getElementById('cal-event-time').value = "";
+            document.getElementById('cal-event-place').value = "";
+            document.getElementById('cal-event-notes').value = "";
+            showToast("Plan guardado en el calendario 📅");
+        });
+
+        // ==========================================================
+        // 4. GALERÍA DE FOTOS CON COMPRESIÓN, URL Y LIGHTBOX
+        // ==========================================================
+        window.setGalleryFilter = function(filterKey, btnEl) {
+            currentGalleryFilter = filterKey;
+            document.querySelectorAll('.gallery-filter-btn').forEach(b => {
+                b.className = "gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0";
+            });
+            btnEl.className = "gallery-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-ink-900 text-white transition shrink-0";
+            renderGallery();
+        };
+
+        function getFilteredPhotos() {
+            const list = state.photos || [];
+            if (currentGalleryFilter === "todas") return list;
+            if (currentGalleryFilter === "favoritas") return list.filter(p => p.favorite);
+            return list.filter(p => p.tag === currentGalleryFilter);
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            const photos = getFilteredPhotos();
+            lightboxPhotoList = photos;
+
+            if (photos.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white/75 rounded-3xl p-8 text-center border border-dashed border-cream-300">
+                        <p class="font-serif text-lg text-ink-900">No hay fotos en este filtro</p>
+                        <p class="text-xs text-ink-800/70 mt-1">Pulsa "Subir foto" para añadir vuestros recuerdos.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = photos.map((p, idx) => {
+                const uploaderName = p.uploader === "p2" ? state.names.p2 : state.names.p1;
+                return `
+                    <article class="h-full bg-white rounded-3xl p-3 shadow-polaroid border border-cream-200 flex flex-col justify-between space-y-2.5 min-w-0">
+                        <button type="button" onclick="openLightbox(${idx})" class="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-cream-100 block text-left">
+                            <img src="${p.dataUrl}" alt="${escapeHTML(p.caption)}" onerror="this.src='https://placehold.co/600x450/E7DEC8/261D1A?text=Recuerdo'" class="w-full h-full object-cover hover:scale-103 transition duration-300">
+                            <span class="absolute top-2.5 left-2.5 text-[10px] font-bold bg-ink-900/70 text-cream-50 backdrop-blur-xs px-2.5 py-0.5 rounded-full">
+                                ${escapeHTML(p.tag || 'Recuerdo')}
+                            </span>
+                        </button>
+                        <div class="px-1 space-y-1 flex-1 flex flex-col justify-between min-w-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <p class="font-serif text-sm font-bold text-ink-900 leading-snug break-words min-w-0 flex-1">${escapeHTML(p.caption)}</p>
+                                <button type="button" onclick="togglePhotoFav('${p.id}')" class="p-1 rounded-full hover:bg-terracotta-50 transition shrink-0" title="Favorita">
+                                    <i data-lucide="heart" class="w-4 h-4 ${p.favorite ? 'fill-terracotta-500 text-terracotta-500' : 'text-ink-800/35'}"></i>
+                                </button>
+                            </div>
+                            <p class="text-[11px] text-ink-800/65 truncate">
+                                ${p.date ? formatDateES(p.date) : ''}${p.place ? ` · ${escapeHTML(p.place)}` : ''} · ${escapeHTML(uploaderName)}
+                            </p>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        function compressImageFile(file, maxSide = 1000, quality = 0.78) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxSide || h > maxSide) {
+                            if (w > h) {
+                                h = Math.round((h * maxSide) / w);
+                                w = maxSide;
+                            } else {
+                                w = Math.round((w * maxSide) / h);
+                                h = maxSide;
+                            }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = reject;
+                    img.src = ev.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.getElementById('photo-file-input').addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files || []);
+            if (files.length === 0) return;
+
+            pendingCompressedPhotos = [];
+            for (const f of files) {
+                try {
+                    const dataUrl = await compressImageFile(f);
+                    pendingCompressedPhotos.push(dataUrl);
+                } catch (err) {
+                    console.warn("Error comprimiendo imagen:", err);
+                }
+            }
+            e.target.value = "";
+            if (pendingCompressedPhotos.length === 0) {
+                showToast("No se pudo procesar la imagen");
+                return;
+            }
+
+            document.getElementById('upload-count-subtitle').textContent =
+                `${pendingCompressedPhotos.length} ${pendingCompressedPhotos.length === 1 ? 'foto lista' : 'fotos listas'}`;
+            document.getElementById('upload-previews-strip').innerHTML = pendingCompressedPhotos.map(src =>
+                `<img src="${src}" class="w-20 h-20 rounded-2xl object-cover border border-cream-300 shrink-0">`
+            ).join('');
+
+            document.getElementById('photo-caption').value = "";
+            document.getElementById('photo-date').value = getTodayISO();
+            document.getElementById('photo-tag').value = "Cita";
+            document.getElementById('photo-place').value = "";
+            document.getElementById('photo-uploader').value = currentAuthRole || "p1";
+            openModal('modal-upload-photo');
+        });
+
+        document.getElementById('form-upload-photo').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (pendingCompressedPhotos.length === 0) return;
+            const caption = document.getElementById('photo-caption').value.trim() || "Un momento juntos";
+            const date = document.getElementById('photo-date').value || getTodayISO();
+            const tag = document.getElementById('photo-tag').value;
+            const place = document.getElementById('photo-place').value.trim();
+            const uploader = document.getElementById('photo-uploader').value;
+
+            pendingCompressedPhotos.forEach((dataUrl, i) => {
+                state.photos.unshift({
+                    id: 'photo-' + Date.now() + '-' + i,
+                    dataUrl,
+                    caption: pendingCompressedPhotos.length > 1 ? `${caption} (${i + 1})` : caption,
+                    date,
+                    tag,
+                    place,
+                    uploader,
+                    favorite: false
+                });
+            });
+
+            pendingCompressedPhotos = [];
+            closeAllModals();
+            persistState();
+            showToast("¡Recuerdo guardado en la galería! 📸");
+        });
+
+        window.openAddPhotoUrlModal = function() {
+            document.getElementById('photo-url-input').value = "";
+            document.getElementById('photo-url-caption').value = "";
+            document.getElementById('photo-url-date').value = getTodayISO();
+            document.getElementById('photo-url-tag').value = "Cita";
+            openModal('modal-photo-url');
+        };
+
+        document.getElementById('form-photo-url').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const url = document.getElementById('photo-url-input').value.trim();
+            if (!url) {
+                showToast("Introduce una URL válida");
+                return;
+            }
+            const caption = document.getElementById('photo-url-caption').value.trim() || "Recuerdo compartido";
+            const date = document.getElementById('photo-url-date').value || getTodayISO();
+            const tag = document.getElementById('photo-url-tag').value;
+
+            state.photos.unshift({
+                id: 'photo-' + Date.now(),
+                dataUrl: url,
+                caption,
+                date,
+                tag,
+                place: "",
+                uploader: currentAuthRole || "p1",
+                favorite: false
+            });
+
+            closeAllModals();
+            persistState();
+            showToast("Imagen añadida a la galería 📸");
+        });
+
+        window.togglePhotoFav = function(id) {
+            const p = (state.photos || []).find(x => x.id === id);
+            if (p) {
+                p.favorite = !p.favorite;
+                persistState();
+            }
+        };
+
+        window.openLightbox = function(index) {
+            if (!lightboxPhotoList || lightboxPhotoList.length === 0) return;
+            lightboxIndex = Math.max(0, Math.min(index, lightboxPhotoList.length - 1));
+            updateLightboxUI();
+            openModal('modal-lightbox');
+        };
+
+        window.openLightboxById = function(id) {
+            const idx = lightboxPhotoList.findIndex(p => p.id === id);
+            if (idx !== -1) openLightbox(idx);
+        };
+
+        window.stepLightbox = function(delta) {
+            if (!lightboxPhotoList || lightboxPhotoList.length === 0) return;
+            lightboxIndex = (lightboxIndex + delta + lightboxPhotoList.length) % lightboxPhotoList.length;
+            updateLightboxUI();
+        };
+
+        function updateLightboxUI() {
+            const p = lightboxPhotoList[lightboxIndex];
+            if (!p) return;
+            const uploaderName = p.uploader === "p2" ? state.names.p2 : state.names.p1;
+
+            document.getElementById('lightbox-counter').textContent = `${lightboxIndex + 1} / ${lightboxPhotoList.length}`;
+            document.getElementById('lightbox-img').src = p.dataUrl;
+            document.getElementById('lightbox-tag').textContent = p.tag || "Recuerdo";
+            document.getElementById('lightbox-date').textContent = p.date ? formatDateES(p.date) : "";
+            document.getElementById('lightbox-place').textContent = p.place ? `📍 ${p.place}` : "";
+            document.getElementById('lightbox-caption').textContent = p.caption;
+            document.getElementById('lightbox-uploader').textContent = `Subido por ${uploaderName}`;
+
+            const favBtn = document.getElementById('lightbox-fav-btn');
+            favBtn.innerHTML = `<i data-lucide="heart" class="w-4 h-4 ${p.favorite ? 'fill-terracotta-500 text-terracotta-400' : 'text-cream-50'}"></i>`;
+            lucide.createIcons();
+        }
+
+        window.toggleLightboxFavorite = function() {
+            const p = lightboxPhotoList[lightboxIndex];
+            if (!p) return;
+            const real = (state.photos || []).find(x => x.id === p.id);
+            if (real) {
+                real.favorite = !real.favorite;
+                p.favorite = real.favorite;
+                updateLightboxUI();
+                persistState();
+            }
+        };
+
+        window.deleteLightboxPhoto = function() {
+            const p = lightboxPhotoList[lightboxIndex];
+            if (!p) return;
+            state.photos = (state.photos || []).filter(x => x.id !== p.id);
+            closeAllModals();
+            persistState();
+            showToast("Foto eliminada");
+        };
+
+        // ==========================================================
+        // 5. BUZÓN DE NOTAS ESTILO CORREO / GMAIL
+        // ==========================================================
+        function normalizeNote(note) {
+            const sender = note.sender === "p2" ? "p2" : "p1";
+            const recipient = note.recipient || (sender === "p1" ? "p2" : "p1");
+            return {
+                ...note,
+                sender,
+                recipient,
+                subject: note.subject || note.tag || "Nota para ti ❤️"
+            };
+        }
+
+        window.setMailboxFolder = function(folder) {
+            currentMailboxFolder = folder;
+            const tabs = {
+                inbox: document.getElementById('tab-mail-inbox'),
+                sent: document.getElementById('tab-mail-sent'),
+                starred: document.getElementById('tab-mail-starred')
+            };
+            Object.entries(tabs).forEach(([key, el]) => {
+                if (!el) return;
+                el.className = key === folder
+                    ? "py-2.5 px-2 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition flex items-center justify-center gap-1 min-w-0"
+                    : "py-2.5 px-2 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition flex items-center justify-center gap-1 min-w-0";
+            });
+            renderMailbox();
+        };
+
+        window.openComposeNoteModal = function(prefillSubject = "") {
+            const activeRole = currentAuthRole || "p1";
+            const targetRole = activeRole === "p1" ? "p2" : "p1";
+            const fromName = activeRole === "p1" ? state.names.p1 : state.names.p2;
+            const toName = targetRole === "p1" ? state.names.p1 : state.names.p2;
+
+            document.getElementById('compose-from-label').textContent = fromName;
+            document.getElementById('compose-to-label').textContent = `${toName} ❤️`;
+            document.getElementById('note-subject').value = prefillSubject;
+            document.getElementById('note-tag').value = "❤️ Carta de amor";
+            document.getElementById('note-body').value = "";
+            openModal('modal-send-note');
+        };
+
+        function renderMailbox() {
+            const container = document.getElementById('mailbox-list');
+            const activeRole = currentAuthRole || "p1";
+            const allNotes = (state.notes || []).map(normalizeNote);
+
+            const inboxNotes = allNotes.filter(n => n.recipient === activeRole);
+            const sentNotes = allNotes.filter(n => n.sender === activeRole);
+            const starredNotes = allNotes.filter(n => n.favorite && (n.recipient === activeRole || n.sender === activeRole));
+
+            const unreadInboxCount = inboxNotes.filter(n => !n.read).length;
+            const navDot = document.getElementById('nav-unread-dot');
+            if (navDot) navDot.classList.toggle('hidden', unreadInboxCount === 0);
+
+            const inboxBadge = document.getElementById('badge-inbox-unread');
+            if (unreadInboxCount > 0) {
+                inboxBadge.textContent = unreadInboxCount;
+                inboxBadge.classList.remove('hidden');
+            } else {
+                inboxBadge.classList.add('hidden');
+            }
+            document.getElementById('badge-sent-count').textContent = sentNotes.length;
+
+            let list = inboxNotes;
+            if (currentMailboxFolder === "sent") list = sentNotes;
+            if (currentMailboxFolder === "starred") list = starredNotes;
+
+            if (list.length === 0) {
+                const msgTitle = currentMailboxFolder === "inbox"
+                    ? "No tienes notas recibidas aquí"
+                    : currentMailboxFolder === "sent"
+                        ? "Aún no has enviado notas"
+                        : "No tienes notas en favoritos";
+                container.innerHTML = `
+                    <div class="bg-white/75 rounded-3xl p-8 text-center border border-dashed border-cream-300">
+                        <p class="font-serif text-lg text-ink-900">${msgTitle}</p>
+                        <p class="text-xs text-ink-800/70 mt-1">Pulsa "+ Redactar" para escribir un mensaje.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = list.map(note => {
+                const isIncoming = note.recipient === activeRole;
+                const isUnreadForMe = isIncoming && !note.read;
+                const counterpartName = isIncoming
+                    ? (note.sender === "p1" ? state.names.p1 : state.names.p2)
+                    : (note.recipient === "p1" ? state.names.p1 : state.names.p2);
+                const prefixLabel = isIncoming ? `De: ${counterpartName}` : `Para: ${counterpartName}`;
+                const initialLetter = (counterpartName || "N").charAt(0).toUpperCase();
+                const snippet = note.body.replace(/\s+/g, ' ').trim();
+
+                const statusChip = !isIncoming
+                    ? (note.read
+                        ? `<span class="text-[10px] font-semibold text-sage-700 bg-sage-50 px-2 py-0.5 rounded-full shrink-0">✓✓ Leído</span>`
+                        : `<span class="text-[10px] font-semibold text-ink-800/60 bg-cream-100 px-2 py-0.5 rounded-full shrink-0">Pendiente</span>`)
+                    : (isUnreadForMe
+                        ? `<span class="text-[10px] font-bold text-white bg-terracotta-500 px-2 py-0.5 rounded-full shrink-0">Nuevo</span>`
+                        : `<span class="text-[10px] font-semibold text-sage-700 bg-sage-50 px-2 py-0.5 rounded-full shrink-0">Leído</span>`);
+
+                return `
+                    <div onclick="openNoteDetail('${note.id}')" class="cursor-pointer rounded-3xl p-4 border ${
+                        isUnreadForMe
+                            ? 'bg-gradient-to-r from-terracotta-50/90 to-white border-terracotta-400/75 shadow-card'
+                            : 'bg-white border-cream-200 hover:border-cream-300'
+                    } flex items-start gap-3 transition active:scale-99">
+                        <div class="w-10 h-10 rounded-full ${isUnreadForMe ? 'bg-terracotta-500 text-white' : 'bg-cream-100 text-ink-900'} font-serif font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">
+                            ${escapeHTML(initialLetter)}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-xs ${isUnreadForMe ? 'font-bold text-ink-900' : 'font-semibold text-ink-800/80'} truncate">
+                                    ${escapeHTML(prefixLabel)}
+                                </span>
+                                <span class="text-[10px] ${isUnreadForMe ? 'font-bold text-terracotta-600' : 'text-ink-800/55'} shrink-0">
+                                    ${escapeHTML(note.date)}
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between gap-1.5 mt-0.5">
+                                <p class="font-serif text-[15px] ${isUnreadForMe ? 'font-bold text-ink-900' : 'font-semibold text-ink-900/90'} truncate min-w-0 flex-1">
+                                    ${escapeHTML(note.subject)}
+                                </p>
+                                ${statusChip}
+                            </div>
+                            <p class="text-xs ${isUnreadForMe ? 'text-ink-900/85 font-medium' : 'text-ink-800/65'} truncate mt-0.5">
+                                ${escapeHTML(snippet)}
+                            </p>
+                            <div class="flex items-center justify-between gap-2 mt-2">
+                                <span class="text-[10px] font-semibold bg-cream-100 text-ink-800/75 px-2 py-0.5 rounded-full truncate">
+                                    ${escapeHTML(note.tag)}
+                                </span>
+                                <button type="button" onclick="event.stopPropagation(); toggleNoteFav('${note.id}')" title="Favorita" class="p-1 rounded-full hover:bg-gold-50 transition shrink-0">
+                                    <i data-lucide="star" class="w-4 h-4 ${note.favorite ? 'fill-gold-400 text-gold-500' : 'text-ink-800/30'}"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        window.openNoteDetail = function(id) {
+            const rawNote = (state.notes || []).find(x => x.id === id);
+            if (!rawNote) return;
+
+            const activeRole = currentAuthRole || "p1";
+            const note = normalizeNote(rawNote);
+            activeReadNoteId = note.id;
+
+            let changed = false;
+            if (note.recipient === activeRole && !rawNote.read) {
+                rawNote.read = true;
+                changed = true;
+            }
+
+            const senderName = note.sender === "p1" ? state.names.p1 : state.names.p2;
+            const recipientName = note.recipient === "p1" ? state.names.p1 : state.names.p2;
+
+            document.getElementById('read-note-tag').textContent = note.tag;
+            document.getElementById('read-note-subject').textContent = note.subject;
+            document.getElementById('read-note-avatar').textContent = senderName.charAt(0).toUpperCase();
+            document.getElementById('read-note-sender-line').textContent = `De: ${senderName}`;
+            document.getElementById('read-note-recipient-line').textContent = `Para: ${recipientName}`;
+            document.getElementById('read-note-date').textContent = note.date;
+            document.getElementById('read-note-body').textContent = note.body;
+
+            const badge = document.getElementById('read-note-status-badge');
+            if (note.sender === activeRole) {
+                badge.textContent = rawNote.read ? `Leído por ${recipientName}` : `Pendiente de leer por ${recipientName}`;
+                badge.className = rawNote.read
+                    ? "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-sage-50 text-sage-700"
+                    : "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-cream-200 text-ink-800/75";
+            } else {
+                badge.textContent = "Recibido · Leído";
+                badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-sage-50 text-sage-700";
+            }
+
+            document.getElementById('read-note-reply-bar').classList.toggle('hidden', note.recipient !== activeRole);
+            updateReadModalStarUI(rawNote.favorite);
+            openModal('modal-read-note');
+
+            if (changed) {
+                persistState();
+            }
+        };
+
+        function updateReadModalStarUI(isFav) {
+            const btn = document.getElementById('read-note-star-btn');
+            if (!btn) return;
+            btn.innerHTML = `<i data-lucide="star" class="w-4 h-4 ${isFav ? 'fill-gold-400 text-gold-500' : 'text-ink-800/40'}"></i>`;
+            lucide.createIcons();
+        }
+
+        window.toggleReadModalStar = function() {
+            if (!activeReadNoteId) return;
+            const n = (state.notes || []).find(x => x.id === activeReadNoteId);
+            if (n) {
+                n.favorite = !n.favorite;
+                updateReadModalStarUI(n.favorite);
+                persistState();
+            }
+        };
+
+        window.deleteReadModalNote = function() {
+            if (!activeReadNoteId) return;
+            state.notes = (state.notes || []).filter(x => x.id !== activeReadNoteId);
+            activeReadNoteId = null;
+            closeAllModals();
+            persistState();
+            showToast("Nota eliminada");
+        };
+
+        window.replyToCurrentNote = function() {
+            const n = (state.notes || []).find(x => x.id === activeReadNoteId);
+            const subj = n && n.subject ? `Re: ${n.subject.replace(/^Re:\s*/i, '')}` : "";
+            openComposeNoteModal(subj);
+        };
+
+        window.toggleNoteFav = function(id) {
+            const n = (state.notes || []).find(x => x.id === id);
+            if (n) {
+                n.favorite = !n.favorite;
+                persistState();
+            }
+        };
+
+        document.getElementById('form-send-note').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const body = document.getElementById('note-body').value.trim();
+            if (!body) {
+                showToast("Escribe un mensaje antes de enviar");
+                return;
+            }
+            const sender = currentAuthRole || "p1";
+            const recipient = sender === "p1" ? "p2" : "p1";
+            const tag = document.getElementById('note-tag').value;
+            const rawSubject = document.getElementById('note-subject').value.trim();
+            const subject = rawSubject || tag.replace(/^[^\wÁÉÍÓÚáéíóúÑñ]+/, '').trim() || "Nota para ti ❤️";
+
+            const now = new Date();
+            const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            const dateStr = `${now.getDate()} ${MESES_ES[now.getMonth()].slice(0, 3)} · ${timeStr}`;
+
+            state.notes.unshift({
+                id: 'note-' + Date.now(),
+                sender,
+                recipient,
+                subject,
+                tag,
+                body,
+                date: dateStr,
+                read: false,
+                favorite: false
+            });
+
+            closeAllModals();
+            persistState();
+            const recipientName = recipient === "p1" ? state.names.p1 : state.names.p2;
+            showToast(`Nota enviada a ${recipientName} 💌`);
+        });
+
+        // ==========================================================
+        // 6. PLANES (NUEVOS Y REGISTRO DE HECHOS)
+        // ==========================================================
+        window.switchPlansSubtab = function(tab) {
+            currentPlansSubtab = tab;
+            const btnPending = document.getElementById('tab-plans-pending');
+            const btnDone = document.getElementById('tab-plans-done');
+            btnPending.className = tab === 'pending'
+                ? "py-2.5 px-3 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition flex items-center justify-center gap-1.5 min-w-0"
+                : "py-2.5 px-3 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition flex items-center justify-center gap-1.5 min-w-0";
+            btnDone.className = tab === 'done'
+                ? "py-2.5 px-3 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition flex items-center justify-center gap-1.5 min-w-0"
+                : "py-2.5 px-3 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition flex items-center justify-center gap-1.5 min-w-0";
+            renderPlansSection();
+        };
+
+        function renderPlansSection() {
+            const pending = (state.plans || []).filter(p => !p.done);
+            const done = (state.plans || []).filter(p => p.done).sort((a, b) => (b.doneDate || '').localeCompare(a.doneDate || ''));
+
+            document.getElementById('count-pending-plans').textContent = pending.length;
+            document.getElementById('count-done-plans').textContent = done.length;
+
+            const container = document.getElementById('plans-container');
+            if (currentPlansSubtab === 'pending') {
+                if (pending.length === 0) {
+                    container.innerHTML = `
+                        <div class="bg-white/75 rounded-3xl p-8 text-center border border-dashed border-cream-300">
+                            <p class="font-serif text-lg text-ink-900">No hay planes nuevos pendientes</p>
+                            <p class="text-xs text-ink-800/70 mt-1">Pulsa "Añadir plan" para guardar vuestra próxima idea.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                container.innerHTML = pending.map(p => `
+                    <div class="bg-white rounded-3xl p-4 shadow-card border border-cream-200 flex items-center justify-between gap-3">
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600 bg-terracotta-50 px-2.5 py-0.5 rounded-full">
+                                ${escapeHTML(p.category)}
+                            </span>
+                            <p class="text-sm font-bold text-ink-900 mt-1.5 break-words">${escapeHTML(p.title)}</p>
+                            ${p.notes ? `<p class="text-xs text-ink-800/70 mt-0.5 break-words">${escapeHTML(p.notes)}</p>` : ''}
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button type="button" onclick="openSchedulePlanModal('${p.id}')" title="Agendar en el calendario" class="p-2 rounded-xl bg-cream-100 hover:bg-terracotta-100 text-ink-800 transition active:scale-95">
+                                <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                            </button>
+                            <button type="button" onclick="openMarkDoneModal('${p.id}')" class="flex items-center gap-1 px-3 py-2 rounded-xl bg-sage-50 hover:bg-sage-100 text-sage-700 border border-sage-500/30 text-xs font-bold transition active:scale-95">
+                                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                Hecho
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                if (done.length === 0) {
+                    container.innerHTML = `
+                        <div class="bg-white/75 rounded-3xl p-8 text-center border border-dashed border-cream-300">
+                            <p class="font-serif text-lg text-ink-900">Aún no hay planes en el registro de hechos</p>
+                            <p class="text-xs text-ink-800/70 mt-1">Cuando completéis un plan aparecerá guardado aquí.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                container.innerHTML = done.map(p => `
+                    <div class="bg-white rounded-3xl p-4 shadow-card border border-cream-200 space-y-2 min-w-0">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-sage-700 bg-sage-50 px-2.5 py-0.5 rounded-full shrink-0">
+                                ✅ ${escapeHTML(p.category)}
+                            </span>
+                            <span class="text-[11px] font-semibold text-ink-800/65 truncate">${formatDateES(p.doneDate)}</span>
+                        </div>
+                        <p class="font-serif text-lg font-bold text-ink-900 leading-snug break-words">${escapeHTML(p.title)}</p>
+                        ${p.memory ? `
+                            <div class="bg-cream-50 p-3 rounded-2xl border border-cream-200/80 text-xs italic text-ink-800 break-words">
+                                "${escapeHTML(p.memory)}"
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        window.openNewPlanModal = function() {
+            document.getElementById('plan-status-select').value = currentPlansSubtab === 'done' ? 'done' : 'pending';
+            document.getElementById('plan-title').value = "";
+            document.getElementById('plan-notes').value = "";
+            document.getElementById('plan-done-date').value = getTodayISO();
+            document.getElementById('plan-done-memory').value = "";
+            togglePlanDoneFields();
+            openModal('modal-new-plan');
+        };
+
+        window.togglePlanDoneFields = function() {
+            const isDone = document.getElementById('plan-status-select').value === 'done';
+            document.getElementById('plan-done-extra-fields').classList.toggle('hidden', !isDone);
+            document.getElementById('plan-pending-notes-field').classList.toggle('hidden', isDone);
+        };
+
+        document.getElementById('form-new-plan').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('plan-title').value.trim();
+            if (!title) {
+                showToast("Escribe el título del plan");
+                return;
+            }
+            const isDone = document.getElementById('plan-status-select').value === 'done';
+            const category = document.getElementById('plan-category').value;
+
+            state.plans.unshift({
+                id: 'plan-' + Date.now(),
+                title,
+                category,
+                notes: isDone ? "" : document.getElementById('plan-notes').value.trim(),
+                done: isDone,
+                doneDate: isDone ? (document.getElementById('plan-done-date').value || getTodayISO()) : "",
+                memory: isDone ? document.getElementById('plan-done-memory').value.trim() : ""
+            });
+
+            closeAllModals();
+            persistState();
+            showToast(isDone ? "Añadido al registro de hechos ✅" : "Nuevo plan guardado ✨");
+        });
+
+        window.openMarkDoneModal = function(id) {
+            const plan = (state.plans || []).find(p => p.id === id);
+            if (!plan) return;
+            document.getElementById('complete-plan-id').value = id;
+            document.getElementById('complete-plan-title-display').textContent = plan.title;
+            document.getElementById('complete-plan-date').value = getTodayISO();
+            document.getElementById('complete-plan-memory').value = "";
+            openModal('modal-complete-plan');
+        };
+
+        document.getElementById('form-complete-plan').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('complete-plan-id').value;
+            const plan = (state.plans || []).find(p => p.id === id);
+            if (plan) {
+                plan.done = true;
+                plan.doneDate = document.getElementById('complete-plan-date').value || getTodayISO();
+                plan.memory = document.getElementById('complete-plan-memory').value.trim();
+            }
+            closeAllModals();
+            persistState();
+            showToast("¡Pasado al registro de hechos! 🎉");
+        });
+
+        window.openSchedulePlanModal = function(id) {
+            const plan = (state.plans || []).find(p => p.id === id);
+            if (!plan) return;
+            document.getElementById('schedule-plan-id').value = id;
+            document.getElementById('schedule-plan-title-display').textContent = plan.title;
+            document.getElementById('schedule-plan-date').value = getTodayISO();
+            document.getElementById('schedule-plan-time').value = "";
+            document.getElementById('schedule-plan-place').value = "";
+            openModal('modal-schedule-plan');
+        };
+
+        document.getElementById('form-schedule-plan').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('schedule-plan-id').value;
+            const plan = (state.plans || []).find(p => p.id === id);
+            if (!plan) return;
+
+            const date = document.getElementById('schedule-plan-date').value || getTodayISO();
+            const time = document.getElementById('schedule-plan-time').value;
+            const place = document.getElementById('schedule-plan-place').value.trim();
+
+            state.calendarEvents.push({
+                id: 'ev-' + Date.now(),
+                date,
+                time,
+                title: plan.title,
+                place,
+                notes: plan.notes || "",
+                author: currentAuthRole || "p1"
+            });
+
+            closeAllModals();
+            persistState();
+            showToast("¡Plan agendado en el calendario! 📅");
+        });
+
+        // ==========================================================
+        // 7. GUSTOS Y DETALLES
+        // ==========================================================
+        window.setLikesPersonFilter = function(person, btn) {
+            currentLikesPersonFilter = person;
+            document.querySelectorAll('.like-person-tab').forEach(b => {
+                b.className = "like-person-tab py-2 px-2.5 rounded-xl text-xs font-bold text-ink-800/70 hover:text-ink-900 transition truncate";
+            });
+            btn.className = "like-person-tab py-2 px-2.5 rounded-xl text-xs font-bold bg-white text-ink-900 shadow-xs transition truncate";
+            renderLikesSection();
+        };
+
+        window.setLikesCategoryFilter = function(cat, btn) {
+            currentLikesCategoryFilter = cat;
+            document.querySelectorAll('.like-cat-tab').forEach(b => {
+                b.className = "like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-ink-800 border border-cream-200 transition shrink-0";
+            });
+            btn.className = "like-cat-tab px-3 py-1.5 rounded-full text-xs font-semibold bg-ink-900 text-white transition shrink-0";
+            renderLikesSection();
+        };
+
+        function renderLikesSection() {
+            const container = document.getElementById('likes-container');
+            let items = state.likes || [];
+            if (currentLikesPersonFilter !== 'todos') {
+                items = items.filter(item => item.person === currentLikesPersonFilter);
+            }
+            if (currentLikesCategoryFilter !== 'todas') {
+                items = items.filter(item => item.category === currentLikesCategoryFilter);
+            }
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white/75 rounded-3xl p-8 text-center border border-dashed border-cream-300">
+                        <p class="font-serif text-lg text-ink-900">Aún no hay detalles aquí</p>
+                        <p class="text-xs text-ink-800/70 mt-1">Pulsa "Añadir" para apuntar gustos, tallas o ideas.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = items.map(item => {
+                const personName = item.person === "p2" ? state.names.p2 : state.names.p1;
+                const badgeClass = item.person === "p2"
+                    ? "bg-terracotta-50 text-terracotta-600 border-terracotta-200/70"
+                    : "bg-sage-50 text-sage-700 border-sage-500/25";
+                const emoji = CATEGORY_EMOJIS[item.category] || "✨";
+
+                return `
+                    <article onclick="openEditLikeModal('${item.id}')" class="cursor-pointer h-full bg-white rounded-3xl p-4 shadow-card border border-cream-200 hover:border-terracotta-300 flex flex-col justify-between space-y-2.5 min-w-0 transition">
+                        <div class="space-y-2 min-w-0">
+                            <div class="flex items-start justify-between gap-2">
+                                <div class="flex items-center gap-1.5 flex-wrap min-w-0">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${badgeClass}">
+                                        ${escapeHTML(personName)}
+                                    </span>
+                                    <span class="text-[11px] font-semibold text-ink-800/70 bg-cream-100 px-2.5 py-0.5 rounded-full">
+                                        ${emoji} ${escapeHTML(item.category)}
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-1 shrink-0">
+                                    <button type="button" onclick="event.stopPropagation(); openEditLikeModal('${item.id}')" class="p-1.5 text-ink-800/45 hover:text-sage-600 transition" title="Editar">
+                                        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                    <button type="button" onclick="event.stopPropagation(); deleteLikeItem('${item.id}')" class="p-1.5 text-ink-800/45 hover:text-terracotta-600 transition" title="Eliminar">
+                                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h4 class="font-serif text-base font-bold text-ink-900 leading-snug break-words">${escapeHTML(item.title)}</h4>
+                        </div>
+                        <p class="text-xs text-ink-800/80 leading-relaxed break-words">${escapeHTML(item.detail)}</p>
+                    </article>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        window.openNewLikeModal = function() {
+            document.getElementById('like-modal-title').textContent = "Añadir Gusto o Detalle";
+            document.getElementById('like-editing-id').value = "";
+            document.getElementById('like-person').value = currentAuthRole || "p2";
+            document.getElementById('like-category').value = "Comida y dulce";
+            document.getElementById('like-title').value = "";
+            document.getElementById('like-detail').value = "";
+            openModal('modal-like-item');
+        };
+
+        window.openEditLikeModal = function(id) {
+            const item = (state.likes || []).find(x => x.id === id);
+            if (!item) return;
+            document.getElementById('like-modal-title').textContent = "Editar Gusto o Detalle";
+            document.getElementById('like-editing-id').value = item.id;
+            document.getElementById('like-person').value = item.person;
+            document.getElementById('like-category').value = item.category;
+            document.getElementById('like-title').value = item.title;
+            document.getElementById('like-detail').value = item.detail;
+            openModal('modal-like-item');
+        };
+
+        document.getElementById('form-like-item').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('like-title').value.trim();
+            const detail = document.getElementById('like-detail').value.trim();
+            if (!title || !detail) {
+                showToast("Completa el título y el detalle");
+                return;
+            }
+            if (!state.likes) state.likes = [];
+            const editId = document.getElementById('like-editing-id').value;
+            const person = document.getElementById('like-person').value;
+            const category = document.getElementById('like-category').value;
+
+            if (editId) {
+                const existing = state.likes.find(x => x.id === editId);
+                if (existing) {
+                    existing.person = person;
+                    existing.category = category;
+                    existing.title = title;
+                    existing.detail = detail;
+                }
+                showToast("Detalle actualizado ✨");
+            } else {
+                state.likes.unshift({
+                    id: 'like-' + Date.now(),
+                    person,
+                    category,
+                    title,
+                    detail
+                });
+                showToast("Detalle guardado ✨");
+            }
+
+            closeAllModals();
+            persistState();
+        });
+
+        window.deleteLikeItem = function(id) {
+            state.likes = (state.likes || []).filter(x => x.id !== id);
+            persistState();
+            showToast("Detalle eliminado");
+        };
+
+        // ==========================================================
+        // 8. EXPORTAR / IMPORTAR RESPALDO JSON ENTRE DISPOSITIVOS
+        // ==========================================================
+        window.exportBackupJSON = function() {
+            try {
+                const dataStr = JSON.stringify(state, null, 2);
+                const blob = new Blob([dataStr], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `nuestro-rincon-respaldo-${getTodayISO()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast("Respaldo descargado (.json) 📦");
+            } catch (err) {
+                console.warn("Error exportando respaldo:", err);
+                showToast("No se pudo exportar el archivo");
+            }
+        };
+
+        document.getElementById('import-json-input').addEventListener('change', (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                try {
+                    const imported = JSON.parse(ev.target.result);
+                    if (!imported || typeof imported !== 'object') {
+                        throw new Error("Formato inválido");
+                    }
+                    state = {
+                        ...JSON.parse(JSON.stringify(INITIAL_STATE)),
+                        ...imported,
+                        names: {
+                            ...JSON.parse(JSON.stringify(INITIAL_STATE.names)),
+                            ...(imported.names || {})
+                        }
+                    };
+                    closeAllModals();
+                    persistState();
+                    showToast("¡Datos importados correctamente! ❤️");
+                } catch (err) {
+                    console.warn("Error importando JSON:", err);
+                    showToast("Archivo de respaldo no válido");
+                }
+            };
+            reader.readAsText(file);
+            e.target.value = "";
+        });
+
+        // ==========================================================
+        // 9. NAVEGACIÓN, MODALES Y RENDERIZADO GENERAL
+        // ==========================================================
+        window.navigateTo = function(sec) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`sec-${sec}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
+                if (btn.dataset.nav === sec) {
+                    btn.classList.add('text-terracotta-600', 'bg-terracotta-50');
+                    btn.classList.remove('text-ink-800/60');
+                } else {
+                    btn.classList.remove('text-terracotta-600', 'bg-terracotta-50');
+                    btn.classList.add('text-ink-800/60');
+                }
+            });
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        };
+
+        window.openModal = function(id) {
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.querySelectorAll('.modal-box').forEach(m => m.classList.add('hidden'));
+            const box = document.getElementById(id);
+            if (box) box.classList.remove('hidden');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        };
+
+        window.closeAllModals = function() {
+            document.getElementById('modal-overlay').classList.add('hidden');
+            document.querySelectorAll('.modal-box').forEach(m => m.classList.add('hidden'));
+        };
+
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+            const txt = document.getElementById('toast-text');
+            if (!box || !txt) return;
+            txt.textContent = msg;
+            box.classList.remove('opacity-0');
+            setTimeout(() => box.classList.add('opacity-0'), 2600);
+        }
+
+        window.copyCoupleCode = function() {
+            const code = document.getElementById('sync-code-display').textContent;
+            const tmp = document.createElement('input');
+            tmp.value = code;
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand('copy');
+            document.body.removeChild(tmp);
+            showToast("Identificador copiado");
+        };
+
+        function renderAll() {
+            document.getElementById('header-names').textContent = `${state.names.p1} & ${state.names.p2}`;
+            const activeDisplayName = currentAuthRole === "p2" ? state.names.p2 : state.names.p1;
+            document.getElementById('header-user-greeting').textContent = `Hola, ${activeDisplayName} · 28 Feb 2025`;
+
+            document.getElementById('tab-likes-p2').textContent = state.names.p2;
+            document.getElementById('tab-likes-p1').textContent = state.names.p1;
+
+            ['cal-event-author', 'photo-uploader'].forEach(selId => {
+                const el = document.getElementById(selId);
+                if (el && el.options.length >= 2) {
+                    el.options[0].text = state.names.p1;
+                    el.options[1].text = state.names.p2;
+                }
+            });
+
+            const likePersonSel = document.getElementById('like-person');
+            if (likePersonSel && likePersonSel.options.length >= 2) {
+                likePersonSel.options[0].text = state.names.p2;
+                likePersonSel.options[1].text = state.names.p1;
+            }
+
+            updateCounterAndAnniversaries();
+            renderHomePreviews();
+            renderCalendar();
+            renderGallery();
+            renderMailbox();
+            renderPlansSection();
+            renderLikesSection();
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function escapeHTML(str) {
+            if (!str) return "";
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        function bindEvents() {
+            const loginForm = document.getElementById('form-login');
+            const loginBtn = document.getElementById('btn-login-submit');
+            if (loginForm) loginForm.addEventListener('submit', handleLoginAttempt);
+            if (loginBtn) loginBtn.addEventListener('click', handleLoginAttempt);
+
+            const togglePassBtn = document.getElementById('btn-toggle-password');
+            if (togglePassBtn) {
+                togglePassBtn.addEventListener('click', () => {
+                    const input = document.getElementById('login-password');
+                    const icon = document.getElementById('icon-eye-pass');
+                    if (!input || !icon) return;
+                    if (input.type === "password") {
+                        input.type = "text";
+                        icon.setAttribute("data-lucide", "eye-off");
+                    } else {
+                        input.type = "password";
+                        icon.setAttribute("data-lucide", "eye");
+                    }
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                });
+            }
+
+            const logoutBtn = document.getElementById('btn-logout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    closeAllModals();
+                    clearSession();
+                    document.getElementById('app-shell').classList.add('hidden');
+                    document.getElementById('login-screen').classList.remove('hidden');
+                    document.getElementById('login-error-box').classList.add('hidden');
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                });
+            }
+
+            const openProfileBtn = document.getElementById('btn-open-profile');
+            if (openProfileBtn) {
+                openProfileBtn.addEventListener('click', () => {
+                    document.getElementById('input-p1-name').value = state.names.p1;
+                    document.getElementById('input-p2-name').value = state.names.p2;
+                    openModal('modal-profile');
+                });
+            }
+
+            const profileForm = document.getElementById('form-profile');
+            if (profileForm) {
+                profileForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    state.names.p1 = document.getElementById('input-p1-name').value.trim() || "Rubén";
+                    state.names.p2 = document.getElementById('input-p2-name').value.trim() || "Mar";
+                    closeAllModals();
+                    persistState();
+                    showToast("Nombres actualizados");
+                });
+            }
+
+            const openSyncBtn = document.getElementById('btn-open-sync');
+            if (openSyncBtn) {
+                openSyncBtn.addEventListener('click', () => openModal('modal-sync'));
+            }
+
+            const overlay = document.getElementById('modal-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target.id === 'modal-overlay') closeAllModals();
+                });
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            bindEvents();
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            const savedRole = checkSavedSession();
+            if (savedRole) {
+                unlockAppForRole(savedRole);
+            }
+        });
+    </script>
+</body>
+</html>
